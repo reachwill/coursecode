@@ -1,0 +1,152 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>RIA</title>
+<style>
+#cartDiv{
+	position:absolute;
+	right:40px;
+	top:10px;
+}
+
+#cart{
+	border:1px solid #69C;	
+}
+
+#cart th{
+	background:#69c;	
+}
+
+#details img{
+	display:block;
+	margin:20px;	
+}
+
+
+</style>
+
+
+
+
+</head>
+
+<body>
+<select id="carsSelect"></select>
+<div id="details"></div>
+
+<div id="cartDiv">
+	<button id="addToCart">Add to Cart</button>
+	<table id="cart">
+    	<thead>
+        	<tr>
+            	<th>Model</th>
+                <th>Cost</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script>
+//declare a global array to store cars
+var carsArray = [];
+//create array for cart items
+var cart = [];
+
+$(document).ready(function(e){
+	
+	
+	//listen for user clicking on delete links in cart table
+	$('#cart').on('click','.deleteLink',function(e){
+		var tr = $(this).parent().parent();
+		//remove item from the cart array
+		var index = tr.index();
+		cart.splice(index,1);
+		localStorage.setItem('cart',JSON.stringify(cart));
+		
+		tr.fadeOut(500,function(e){
+			tr.remove();
+		});
+	});
+	
+	
+	//check if there are cart items saved in localStorage
+	if(localStorage.getItem('cart') != null){
+		cart = JSON.parse(localStorage.getItem('cart'));
+		
+		$.each(cart,function(index,value){
+			
+			var htmlStr = '<tr><td>'+value.filename+'</td><td>'+value.cost+'</td><td><a class="deleteLink" href="#">delete</a></td></tr>';
+			$('#cart').append(htmlStr);
+			
+		});
+	}
+	
+	
+	
+	
+	
+	$('#addToCart').click(function(e) {
+		
+		var selectedIndex = $('#carsSelect > option:selected').index();
+		
+		var found = false;
+		for(var i=0 ; i<cart.length ; i++){
+			if(cart[i].filename == carsArray[selectedIndex].filename){
+				found=true;
+				break;
+			}
+		}
+		
+        if(!found){
+			var filename = carsArray[selectedIndex].filename;
+			var cost = carsArray[selectedIndex].cost;
+			var htmlStr = '<tr><td>'+filename+'</td><td>'+cost+'</td><td><a class="deleteLink" href="#">delete</a></td></tr>';
+			$('#cart').append(htmlStr);
+			cart.push(carsArray[selectedIndex]);
+			localStorage.setItem('cart',JSON.stringify(cart));
+			
+		}
+ 
+    });
+	
+	
+	
+	
+	$('#carsSelect').change(function(e) {
+		var selectedIndex = $('#carsSelect>option:selected').index();
+		
+		$('#details').html('This car costs: £'+ Number(carsArray[selectedIndex].cost).toFixed(2)).hide().fadeIn();
+		
+        $('<img src="images2/'+carsArray[selectedIndex].filename+'" width="640" alt="'+carsArray[selectedIndex].caption+'">').appendTo('#details');
+		
+		
+		
+		
+    });
+	
+	$.ajax({
+		url:'cars.txt',
+		type:'get',
+		dataType:'json',
+		success:function(data){
+			carsArray = data.cars;
+			var numCars = data.cars.length;
+			for(var i=0 ; i<numCars ; i++){
+				$('<option>'+data.cars[i].caption+'</option>').appendTo('#carsSelect');
+			}
+		},
+		error:function(jqXHR, textStatus, errorThrown){
+			alert('problemo')
+		}
+	});
+});
+
+
+
+
+</script>
+</body>
+</html>

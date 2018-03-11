@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>AJAX Pure js</title>
+</head>
+
+<body>
+
+<span id="ajaxButton" style="cursor: pointer; text-decoration: underline">
+  Make a request
+</span>
+
+
+
+<canvas id="canvas" height="450" width="600"></canvas>
+
+
+<script src="Chart.js-master/Chart.min.js"></script>
+<script>
+/*var httpRequest;
+if (window.XMLHttpRequest) { // Mozilla, Safari, ...
+    httpRequest = new XMLHttpRequest();
+} else if (window.ActiveXObject) { // IE 8 and older
+    httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+}*/
+</script>
+
+
+<script type="text/javascript">
+(function() {
+  var httpRequest;
+  document.getElementById("ajaxButton").onclick = function() { makeRequest('data/test1.txt'); };
+
+  function makeRequest(url) {
+    if (window.XMLHttpRequest) { // Mozilla, Safari, ...
+      httpRequest = new XMLHttpRequest();
+    } else if (window.ActiveXObject) { // IE
+      try {
+        httpRequest = new ActiveXObject("Msxml2.XMLHTTP");
+      } 
+      catch (e) {
+        try {
+          httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+        } 
+        catch (e) {}
+      }
+    }
+
+    if (!httpRequest) {
+      alert('Giving up :( Cannot create an XMLHTTP instance');
+      return false;
+    }
+    httpRequest.onreadystatechange = alertContents;
+    httpRequest.open('GET', url);
+    httpRequest.send();
+  }
+
+  function alertContents() {
+    if (httpRequest.readyState === 4) {
+      if (httpRequest.status === 200) {
+		  	//console.log(JSON.parse(httpRequest.responseText))
+        	//alert(httpRequest.responseText);
+			displayOnChart(JSON.parse(httpRequest.responseText));
+      } else {
+        alert('There was a problem with the request.');
+      }
+    }
+  }
+  
+  function displayOnChart(json){
+	var json = json
+	var numDatasets = json.datasets.length;
+	var fetchedDatasets = []
+	for(var i=0;i<numDatasets;i++){
+		fetchedDatasets.push({fillColor:json.datasets[i].fill,strokeColor:json.datasets[i].stroke,data:json.datasets[i].points})
+	}
+	
+	var barChartData = {
+		labels : ["January","February","March","April","May","June","July"],
+		datasets : fetchedDatasets
+	}
+	var canvas  = document.getElementById('canvas');
+	canvas.width = canvas.width;
+	var myLine = new Chart(document.getElementById("canvas").getContext("2d")).Bar(barChartData);
+	setTimeout( function() { makeRequest('data/test1.txt'); }, 5000 );
+  }
+
+})();
+</script>
+</body>
+</html>

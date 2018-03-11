@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Javascript Template</title>
+</head>
+
+<body>
+
+    <input type="text" id="txtUser">
+    <button id="btnLogin">Log in</button>
+
+    <div id="message"></div>
+
+
+    <script>
+        //declare some variables
+        var score = 0;
+        var admin = true;
+        document.getElementById('btnLogin').addEventListener('click', login);
+
+        function login() {
+            var user = document.getElementById('txtUser').value;
+            //check user has entered a name
+            if (user != '') {
+                document.getElementById('message').innerHTML = 'Hello ' + user;
+            } else {
+                alert('You must enter a username');
+            }
+        }
+
+    </script>
+
+
+
+</body>
+
+</html>

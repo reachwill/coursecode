@@ -1,0 +1,120 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Untitled Document</title>
+</head>
+
+<body>
+
+
+
+<canvas id="myCanvas" width="960" height="800" style="background:black"></canvas>
+
+
+<script>
+// Shape - superclass
+function Shape() {
+	this.x = 0;
+	this.y = 0;
+	this.strokeWidth = 2;
+	this.strokeColor = 'green';
+	this.self = this;
+}
+
+
+
+// superclass method
+Shape.prototype.clear = function(x, y) {
+    //alert('clear me: '+this.element.id)
+	console.log(this.element.addEventListener)
+	if(typeof this.element.onclick == "function") {
+	   console.log('added')
+	}else{
+		console.log('not added')
+		this.element.addEventListener('click',function(){});
+	}
+};
+
+
+// Star - subclass
+function Star(c,color, x, y, r, p, m){
+	Shape.call(this); // call super constructor.
+	this.element = document.getElementById(c);
+	var ctx = this.element.getContext("2d");
+	ctx.fillStyle = color;
+	
+	ctx.save();
+    ctx.beginPath();
+    ctx.translate(x, y);
+    ctx.moveTo(0,0-r);
+    for (var i = 0; i < p; i++)
+    {
+        ctx.rotate(Math.PI / p);
+        ctx.lineTo(0, 0 - (r*m));
+        ctx.rotate(Math.PI / p);
+        ctx.lineTo(0, 0 - r);
+    }
+    ctx.fill();
+	ctx.lineWidth = this.strokeWidth;
+	ctx.strokeStyle = this.strokeColor;
+	ctx.stroke();
+    ctx.restore();
+}
+// subclass extends superclass
+Star.prototype = Object.create(Shape.prototype);
+Star.prototype.constructor = Star;
+
+var star = new Star('myCanvas','rgba(0,0,255,0.5)', 400, 300, 100, 5, 0.5);
+star.clear();
+
+// Rectangle - subclass
+function Rectangle(c,color,w,h,x,y) {
+	Shape.call(this); // call super constructor.
+	
+	this.x = x;
+	this.y = y;
+	this.color = color;
+	this.width = w;
+	this.height = h;
+	this.element = document.getElementById(c);
+	
+	//var c = document.getElementById(c);
+	var ctx = this.element.getContext("2d");
+	
+	
+	ctx.fillStyle = color;
+	ctx.fillRect(this.x,this.y,this.width,this.height);
+	
+	ctx.lineWidth = this.strokeWidth;
+	ctx.strokeStyle = this.strokeColor;
+	ctx.strokeRect(this.x,this.y,this.width,this.height);
+	ctx.restore();
+	
+}
+
+// subclass extends superclass
+Rectangle.prototype = Object.create(Shape.prototype);
+Rectangle.prototype.constructor = Rectangle;
+
+var rect = new Rectangle('myCanvas','rgba(255,0,0,0.5)',150,75,400,200);
+
+//rect instanceof Rectangle // true.
+//rect instanceof Shape // true.
+
+
+/*if(!Object.create)
+{
+    Object.create=function(o){
+        function F(){}
+        F.prototype=o;
+        return new F();
+    }
+}*/
+
+
+
+
+</script>
+</body>
+</html>

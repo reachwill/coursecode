@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Inheritance</title>
+</head>
+
+<body>
+
+
+
+<script>
+
+var widgetsArray = [];
+
+/*
+1. Create constructor function for Widget
+2. Create constructor function WidgetType1
+3. Set up dynamic inheritance (this ensures that when you add a property to “Widget”, an instance of WidgetType1 inherits that property)
+4. Extend WidgetType1 using prototype
+5. Create a new instance of WidgetType1 – myWidget
+6. Extend Widget Class using prototype
+*/
+
+//1
+function Widget (isDraggable,width,height) {
+    this.isDraggable = isDraggable || false;
+	(this.isDraggable?this.class='draggable':this.class='');
+	this.width = width || 'auto';
+	this.height = height || 'auto';
+}
+
+Widget.prototype.registerWidget = function(widget){widgetsArray.push(widget)};
+
+
+//2
+function WidgetType1 (multipleSelect, selectOptions,title) {    
+    this.multipleSelect = multipleSelect;
+    this.selectOptions = selectOptions;
+	this.title = title || 'Untitled';
+	Widget.prototype.registerWidget.call(this , this);
+}
+
+//3
+WidgetType1.prototype = new Widget(true);//What we have set up here is an inheritance chain from Widget to WidgetType1
+
+//4
+WidgetType1.prototype.displayWidgetProps = function () {
+    console.log( 'Draggable: ' + this.isDraggable + ', Multiple Select: ' + this.multipleSelect + ', Options: ' + this.selectOptions + ', Title: ' + this.title + ', Visible: ' + this.isVisible + ', CSS Class Name: ' + this.class + ', Width: ' + this.width + ', Height: ' + this.height );
+}//We have extended the functionality of WidgetType1
+
+//or more efficient to apply to super class prototype...
+Widget.prototype.displayWidgetProps = function () {
+    console.log( 'XXXXDraggable: ' + this.isDraggable + ', Multiple Select: ' + this.multipleSelect + ', Options: ' + this.selectOptions + ', Title: ' + this.title + ', Visible: ' + this.isVisible + ', CSS Class Name: ' + this.class + ', Width: ' + this.width + ', Height: ' + this.height );
+}//We have extended the functionality of Widget
+
+
+var myWidget = new WidgetType1 (true, [{'option1':'value1'},{'option2':'value2'},{'option3':'value3'}], 'Widget Title');
+myWidget.width = '25%';
+
+var anotherWidget = new WidgetType1 (false, [{'option1':'value1'},{'option2':'value2'},{'option3':'value3'}], 'Another Widget Title');
+anotherWidget.width = '45%';
+
+
+Widget.prototype.isVisible = true;//Widget class has been extended
+
+
+myWidget.displayWidgetProps();
+
+
+</script>
+</body>
+</html>

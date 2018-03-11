@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>AJAX Example</title>
+</head>
+
+<body>
+
+    <select id="carsSelect"></select>
+
+
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            Communicator.getCarsData('data/cars.txt');
+
+            //listen for user changing selected item in carsSelect
+            $('#carsSelect').change(function() {
+                console.log($(this).find('option:selected'));
+            });
+
+        });
+
+
+        var Communicator = {
+            getCarsData: function(dataURL) {
+                $.ajax({
+                    url: dataURL,
+                    type: 'get',
+                    dataType: 'json',
+                    success: function(data) {
+                        var numCars = data.cars.length;
+                        for (var i = 0; i < numCars; i++) {
+                            var option = '<option value="' + data.cars[i].id + '">' + data.cars[i].caption + '</option>';
+                            $('#carsSelect').append(option);
+                        }
+                    },
+                    error: function(http, message, status) {}
+                });
+            }
+        };
+
+    </script>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Private Properties</title>
+</head>
+
+<body>
+
+<button type="button" id="test">Click</button>
+<output id="output"></output>
+
+
+<script>
+//Private members are made by the constructor. Ordinary vars and parameters of the constructor becomes the private members.
+function Container(param) {
+
+    function dec() {//private func
+        if (secret > 0) {
+            secret -= 1;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    this.member = param;
+    var secret = 3;//private prop
+    var that = this;//incorrect implementation of this -  lose correct scope when this referred to in inner function
+
+    this.service = function () {//privileged func
+        return dec() ? that.member : 'no more tries';
+    };
+}// vars and params not accessible to the outside, nor are they accessible to the object's own public methods. 
+
+
+var myContainer = new Container('Contents for this conatiner');
+
+console.log(myContainer);
+
+console.log(myContainer.service());
+
+document.getElementById('test')
+	.addEventListener('click',
+		function(e){
+			document.getElementById('output').innerHTML = myContainer.service();
+	});
+
+</script>
+</body>
+</html>

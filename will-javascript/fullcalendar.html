@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Javascript Template</title>
+
+    <style>
+        body {
+            font-family: arial;
+        }
+        
+        #calendar {
+            width: 500px;
+        }
+
+    </style>
+    <link rel="stylesheet" href="js/fullcalendar-2.3.2/fullcalendar.min.css">
+
+</head>
+
+<body>
+
+    <div id="calendar"></div>
+
+
+
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="js/fullcalendar-2.3.2/lib/moment.min.js"></script>
+    <script src="js/fullcalendar-2.3.2/fullcalendar.min.js"></script>
+
+
+
+
+    <script>
+        $(document).ready(function() {
+            $('#calendar').fullCalendar({
+                events: [{
+                    title: 'Javascript Course',
+                    start: '2015-08-03',
+                    end: '2015-08-06',
+                    allDay: true
+                }, {
+                    title: 'Photoshop',
+                    start: '2015-08-17',
+                    end: '2015-05-18'
+                }]
+
+            });
+        });
+
+    </script>
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>

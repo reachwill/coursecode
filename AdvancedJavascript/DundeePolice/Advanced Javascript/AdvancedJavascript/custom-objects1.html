@@ -1,0 +1,208 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Custom Objects</title>
+</head>
+
+<body>
+
+
+<script>
+var obj = new Object();
+//or
+var obj = {};
+
+obj.name = "Simon";
+var name = obj.name;
+//or
+obj["name"] = "Simon";
+var name = obj["name"];
+//The second method has the advantage that the name of the property is provided as a string, which means it can be calculated at run-time.
+
+var obj = {
+    name: "Carrot",
+    "for": "Max",
+    details: {
+        color: "orange",
+        size: 12
+    }
+}
+
+//console.log(obj.details.color);
+//console.log(obj["details"]["size"]);
+
+
+
+function inspect(obj) {
+    for (var property in obj) {
+        if (obj.hasOwnProperty(property)) {
+            if (typeof obj[property] == "object")
+                inspect(obj[property]);
+            else
+                console.log(property + "   " + obj[property]);
+        }
+    }
+}
+
+inspect(obj);
+console.log(JSON.stringify(obj, null, '\t'));
+
+
+
+
+
+/*
+function makePerson(first, last) {
+    return {
+        first: first,
+        last: last
+    };
+}
+function personFullName(person) {
+    return person.first + ' ' + person.last;
+}
+function personFullNameReversed(person) {
+    return person.last + ', ' + person.first;
+}
+*/
+//s = makePerson("Simon", "Willison");
+
+
+//console.log(personFullName(s));
+//console.log(personFullNameReversed(s));
+
+//------------------------------------------------------------------------
+
+
+function makePerson(first, last) {
+	console.log(this);
+    return {
+        first: first,
+        last: last,
+        fullName: function() {
+            return this.first + ' ' + this.last;
+        },
+        fullNameReversed: function() {
+            return this.last + ', ' + this.first;
+        }
+    };
+}
+var s = makePerson("Simon", "Willison");
+//console.log(s);
+//s.fullName();
+//s.fullNameReversed();
+
+//------------------------------------------------------------------------
+
+/*
+function Person(first, last) {
+    this.first = first;
+    this.last = last;
+	console.log(this);
+    this.fullName = function() {
+        return this.first + ' ' + this.last;
+    };
+    this.fullNameReversed = function() {
+        return this.last + ', ' + this.first;
+    };
+}
+var w = new Person("Simon", "Willison");
+*/
+//------------------------------------------------------------------------
+
+/*
+function personFullName() {
+    return this.first + ' ' + this.last;
+}
+function personFullNameReversed() {
+    return this.last + ', ' + this.first;
+}
+function Person(first, last) {
+    this.first = first;
+    this.last = last;
+    this.fullName = personFullName;
+    this.fullNameReversed = personFullNameReversed;
+}
+
+var d = new Person("Simon", "Willison");
+var d2 = new Person("Jane", "Doe");
+console.log(d.fullName());
+console.log(d2.fullName());
+*/
+
+//------------------------------------------------------------------------
+/*
+function Person(first, last) {
+    this.first = first;
+    this.last = last;
+}
+Person.prototype.fullName = function() {
+    return this.first + ' ' + this.last;
+};
+Person.prototype.fullNameReversed = function() {
+    return this.last + ', ' + this.first;
+};
+
+var d = new Person("Simon", "Willison");
+var d2 = new Person("Jane", "Doe");
+console.log(d.fullName());
+console.log(d2.fullName());
+
+*/
+
+//------------------------------------------------------------------------
+
+function Person(first, last) {
+    this.first = first;
+    this.last = last;
+}
+Person.prototype.fullName = function() {
+    return this.first + ' ' + this.last;
+};
+Person.prototype.fullNameReversed = function() {
+    return this.last + ', ' + this.first;
+};
+//var s = new Person("Simon", "Willison");
+//s.firstNameCaps();
+//TypeError on line 1: s.firstNameCaps is not a function
+Person.prototype.firstNameCaps = function() {
+    return this.first.toUpperCase()
+};
+//console.log(s.firstNameCaps());
+
+//------------------------------------------------------------------------
+
+var g = "Simon";
+//s.reversed()
+//TypeError on line 1: s.reversed is not a function
+String.prototype.reversed = function() {
+    var r = "";
+    for (var i = this.length - 1; i >= 0; i--) {
+        r += this[i];
+    }
+    return r;
+};
+console.log(g.reversed());
+
+console.log("This can now be reversed".reversed());
+
+//------------------------------------------------------------------------
+
+function lastNameCaps() {
+    return this.last.toUpperCase();
+}
+var s = new Person("Simon", "Willison");
+lastNameCaps.call(s);
+// Is the same as:
+s.lastNameCaps = lastNameCaps;
+console.log(s.lastNameCaps());
+
+
+
+
+
+</script>
+
+</body>
+</html>

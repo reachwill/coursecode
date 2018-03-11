@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+</head>
+
+<body>
+
+    <div ng-app="" ng-controller="playerController">
+
+
+
+        <select ng-options="item.position as item.name for item in names" ng-model="selected">
+        </select>
+        <br>selected: {{selected}}
+
+    </div>
+
+    <script>
+        function playerController($scope) {
+            $scope.names = [
+                {
+                    name: 'Stevie',
+                    position: 'CM'
+                },
+                {
+                    name: 'Raheem',
+                    position: 'LA'
+                },
+                {
+                    name: 'Dan',
+                    position: 'CA'
+                }
+    ];
+            $scope.selected = {
+                name: 'position'
+            };
+        }
+    </script>
+</body>
+
+</html>

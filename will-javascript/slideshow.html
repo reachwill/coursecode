@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Javascript Template</title>
+    <style>
+        #imgBanner {
+            width: 320px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <figure id="banner">
+        <img id="imgBanner">
+        <figcaption id="bannerCaption"></figcaption>
+    </figure>
+
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+    <script>
+        //declare a variable to step thru the images
+        var stepper = 0;
+
+        //declare an array of image names to act as a datasource for the banner
+        var images = [{
+            fileName: 'image1.jpeg',
+            caption: 'Front view of Gran Turismo',
+            cost: 95000
+        }, {
+            fileName: 'image2.jpeg',
+            caption: 'Rear view of Gran Turismo',
+            cost: 95000
+        }, {
+            fileName: 'image3.jpeg',
+            caption: 'A fast Maserati',
+            cost: 125000
+        }, {
+            fileName: 'image4.jpeg',
+            caption: 'A really fast Maserati',
+            cost: 295000
+        }, {
+            fileName: 'image5.jpeg',
+            caption: 'The fastest Maserati',
+            cost: 995000
+        }];
+
+        function displayNextImage() {
+            $('#banner').hide();
+            $('#banner').fadeIn(500);
+            //document.getElementById('imgBanner').src = 'images2/' + images[stepper].fileName;
+            //document.getElementById('bannerCaption').innerHTML = images[stepper].caption;
+            //the jquery way...
+            $('#imgBanner').attr('src', 'images2/' + images[stepper].fileName);
+            $('#bannerCaption').html(images[stepper].caption);
+
+
+
+
+            if (stepper < images.length - 1) {
+                stepper++;
+            } else {
+                stepper = 0;
+            }
+        }
+
+        displayNextImage();
+        setInterval(displayNextImage, 5000);
+
+    </script>
+
+
+
+</body>
+
+
+
+
+
+
+
+
+
+
+</html>

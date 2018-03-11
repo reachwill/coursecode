@@ -1,0 +1,176 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Untitled Document</title>
+</head>
+
+<body>
+<script src="jquery.1.9.0.min.js"></script> 
+<script>
+
+//1================================================= simples
+
+/*var MYAPPLICATION = {
+    MODEL: {
+        product: function (price) { 
+                     this.price = price; 
+                     this.getPrice = function(){
+                         return this.price;
+                     };
+                 }
+    },
+    LOGIC: {
+        calculateVat: function (base) {
+            return base * 1.21;
+        },
+        doCalculations: function () {
+            var p = new MYAPPLICATION.MODEL.product(100);
+            alert(this.calculateVat(p.getPrice()));
+        }
+    }
+}
+
+var p = new MYAPPLICATION.MODEL.product(150);
+alert(p.getPrice());*/
+
+
+//2 ========================================== namespace creating function
+
+/*var MYAPPLICATION = MYAPPLICATION || {};
+
+
+MYAPPLICATION.createNS = function (namespace) {
+    var nsparts = namespace.split(".");
+    var parent = MYAPPLICATION;
+ 
+    // we want to be able to include or exclude the root namespace so we strip
+    // it if it's in the namespace
+    if (nsparts[0] === "MYAPPLICATION") {
+        nsparts = nsparts.slice(1);
+    }
+ 
+    // loop through the parts and create a nested namespace if necessary
+    for (var i = 0; i < nsparts.length; i++) {
+        var partname = nsparts[i];
+        // check if the current parent already has the namespace declared
+        // if it isn't, then create it
+        if (typeof parent[partname] === "undefined") {
+            parent[partname] = {};
+        }
+        // get a reference to the deepest element in the hierarchy so far
+        parent = parent[partname];
+    }
+    // the parent is now constructed with empty namespaces and can be used.
+    // we return the outermost namespace
+    return parent;
+};
+
+MYAPPLICATION.createNS("MYAPPLICATION.MODEL.PRODUCTS");
+MYAPPLICATION.createNS("MYAPPLICATION.LOGIC.BUSINESS");
+ 
+MYAPPLICATION.MODEL.PRODUCTS.product = function(price){                                           
+    this.price = price;    
+    this.isVatApplicable = true;
+    this.getPrice = function(){                                               
+        return this.price;                                            
+    }                                       
+};
+ 
+MYAPPLICATION.MODEL.PRODUCTS.currentvatrate = 1.21;
+ 
+MYAPPLICATION.LOGIC.BUSINESS.getSelectedProductTotal = function () {
+    var p = new MYAPPLICATION.MODEL.PRODUCTS.product(100);
+    if(p.isVatApplicable){
+        return p.getPrice() * MYAPPLICATION.MODEL.PRODUCTS.currentvatrate;
+    }
+    else {
+        return p.getPrice();
+    }
+}
+
+var p = new MYAPPLICATION.MODEL.PRODUCTS.product(150);
+alert(p.getPrice());*/
+
+
+
+//3 ========================================================= final
+// create the root namespace and making sure we're not overwriting it
+
+var MYAPPLICATION = MYAPPLICATION || {};
+ 
+// create a general purpose namespace method
+// this will allow us to create namespace a bit easier
+MYAPPLICATION.createNS = function (namespace) {
+    var nsparts = namespace.split(".");
+    var parent = MYAPPLICATION;
+ 
+    // we want to be able to include or exclude the root namespace 
+    // So we strip it if it's in the namespace
+    if (nsparts[0] === "MYAPPLICATION") {
+        nsparts = nsparts.slice(1);
+    }
+ 
+    // loop through the parts and create 
+    // a nested namespace if necessary
+    for (var i = 0; i < nsparts.length; i++) {
+        var partname = nsparts[i];
+        // check if the current parent already has 
+        // the namespace declared, if not create it
+        if (typeof parent[partname] === "undefined") {
+            parent[partname] = {};
+        }
+        // get a reference to the deepest element 
+        // in the hierarchy so far
+        parent = parent[partname];
+    }
+    // the parent is now completely constructed 
+    // with empty namespaces and can be used.
+    return parent;
+};
+ 
+// Create the namespace for products
+MYAPPLICATION.createNS("MYAPPLICATION.MODEL.PRODUCTS");
+ 
+MYAPPLICATION.MODEL.PRODUCTS.product = function(width, height){
+    // private variables
+    var dimensions = {
+        width: width,
+        height: height
+    };
+    // private methods
+    // creating getWidth and getHeight
+    // to prevent access by reference to dimensions
+    var getWidth = function(){
+        return dimensions.width;
+    };
+    var getHeight = function(){
+        return dimensions.height;
+    };
+    // public API
+    return {
+        getWidth: getWidth,
+        getHeight: getHeight
+    };
+};
+ 
+// Create the namespace for the logic
+MYAPPLICATION.createNS("MYAPPLICATION.LOGIC.BUSINESS");
+ 
+ 
+MYAPPLICATION.LOGIC.BUSINESS.createAndAlertProduct = function (w,h) {
+    var model = MYAPPLICATION.MODEL.PRODUCTS;
+    var p = new model.product(w,h);
+    alert(p.getWidth() + " " + p.getHeight());
+};
+
+//var obj = new MYAPPLICATION.LOGIC.BUSINESS.createAndAlertProduct();
+var obj = new MYAPPLICATION.LOGIC.BUSINESS.createAndAlertProduct(50,100);
+
+
+
+
+
+</script>
+</body>
+</html>

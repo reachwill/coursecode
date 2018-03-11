@@ -1,0 +1,51 @@
+body {
+    background: white;
+}
+p {
+    font-size: .85em;
+}
+.content {
+    white-space: pre;
+    min-height: 100px;
+    width:90%;
+}
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+ul.users ul {
+    list-style: square;
+    padding: 15px;
+    margin: 15px;
+}
+form li {
+    margin-bottom: 10px;
+}
+a.editable {
+    color: black;
+    /*position: relative;*/
+}
+/*a.editable:hover:before {
+    content: 'edit';
+    text-align: center;
+    position: absolute;
+    /*top: 20px;
+    right: -300px;*/
+    width:150px;
+    background: yellow;
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px black;
+}*/
+
+.editable-container.editable-inline,.editableform .control-group,.editable-input{
+  width:90%;
+}
+
+@media (min-width: 768px){
+.form-inline .form-control{
+  width:90%;
+}
+
+}

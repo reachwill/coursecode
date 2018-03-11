@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Calculator</title>
+<style>
+input,button{
+	display:block;
+	margin:10px 0;	
+}
+
+button{
+	border:1px solid #333;
+	background:rgba(0,255,0,0.5);
+}
+
+.currency:before{
+	content:'£';	
+}
+
+.currency{
+	font-weight:bold;	
+}
+
+.error{
+	color:red;
+	text-transform:uppercase;	
+}
+
+
+</style>
+</head>
+
+<body>
+
+<form name="calculator" onKeyPress="checkKeyPressed(event)">
+	<fieldset>
+    	<legend>VAT Calculator</legend>
+        <input type="text" name="subtotal" id="subtotal" placeholder="Subtotal">
+        <span id="subtotalError" class="error"></span>
+        <input type="text" name="rate" id="rate" placeholder="VAT Rate">
+        <span id="vatError" class="error"></span>
+        <button type="button" name="calcBtn" id="calcBtn" onClick="calcVAT()">Calculate</button>
+    </fieldset>
+</form>
+
+<div id="total">multipanel</div>
+
+<!--<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>-->
+
+<script>
+/*$(document).ready(function(e) {
+    var html = $('body').html();
+	html.replace(/multipanel/g,'multiPANEL')
+	$('body').html(html);
+});
+*/
+function checkKeyPressed(e){
+	if(e.keyCode==13){
+		calcVAT();	
+	}
+}
+
+function calcVAT(){
+	var subtotal = Number(document.getElementById('subtotal').value);
+	var rate = Number(document.getElementById('rate').value);
+	//check if numbers have been entered
+	
+	if(isNaN(subtotal)){
+		document.getElementById('subtotalError').innerHTML = 'Doh! Number please!';
+		document.getElementById('subtotal').value = '';	
+	}else{
+		document.getElementById('subtotalError').innerHTML = '';
+	}
+	
+	if(isNaN(rate)){
+		document.getElementById('vatError').innerHTML = 'Doh! Number please!';
+		document.getElementById('rate').value = '';	
+	}else{
+		document.getElementById('vatError').innerHTML = '';
+	}
+	
+	
+	if(isNaN(subtotal) == false && isNaN(rate) == false){
+	
+		var total = subtotal + ((subtotal * rate) / 100);
+		document.getElementById('total').innerHTML = 'You must pay <span class="currency">' + total.toFixed(2) + '</span>';
+	
+	}
+	
+	
+	
+	
+}
+
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+

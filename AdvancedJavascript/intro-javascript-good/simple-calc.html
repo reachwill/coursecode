@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Javascript Template</title>
+</head>
+
+<body>
+    <input type="number" id="txtNum1">
+    <input type="number" id="txtNum2">
+    <button id="btnCalc">Calculate</button>
+    <output id="result"></output>
+
+    <script>
+        btnCalc.addEventListener('click', calc);
+
+        function calc() {
+            var num1 = document.getElementById('txtNum1').value;
+            var num2 = document.getElementById('txtNum2').value;
+            var total = Number(num1) + Number(num2);
+            document.getElementById('result').innerHTML = total;
+        }
+
+    </script>
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>

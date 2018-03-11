@@ -1,0 +1,169 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Untitled Document</title>
+</head>
+
+<body>
+<script>
+/*function Person()
+{
+  //properties/fields
+  this.name = "Rob Gravelle";
+  this.height = 68;
+  this.weight = 170;
+  this.socialInsuranceNumber = "555 555 555";
+
+  //methods/actions
+  this.setHeight = function(height) {this.height=height;}
+  this.getHeight = function() { return this.height; }
+  this.setWeight = function(weight) {this.weight = weight;}
+  this.getWeight = function() { return this.weight; }
+  this.setName   = function(name) {this.name=name;}
+  this.getName   = function() { return this.name; }
+  this.setSocialInsuranceNumber = function(socialInsuranceNumber) { this.socialInsuranceNumber=socialInsuranceNumber; }
+
+  return this;
+}
+//instanciate the Person class
+var aPerson = new Person();
+var myName = aPerson.getName(); //myName now contains "Rob Gravelle"
+aPerson.setName("mud"); //change the name
+var myName = aPerson.getName(); //aPerson's name is now "mud"
+var sinNo = aPerson.getSocialInsuranceNumber() //will also throw an exception.  No getter implemented for that field!
+
+//here all the object member variables are public*/
+
+//---------------------------------------------------------------------
+
+//now lets hide the props
+/*
+function Person()
+{
+  //properties/fields
+  var name = "Rob Gravelle";
+  var height = 68;
+  var weight = 170;
+  var socialInsuranceNumber = "555 555 555";
+
+  //methods/actions
+  this.setHeight = function(newHeight) {height=newHeight;}
+  this.getHeight = function() { return height; }
+  this.setWeight = function(newWeight) {weight = newWeight;}
+  this.getWeight = function() { return weight; }
+  this.setName   = function(newName) {name=newName;}
+  this.getName   = function() { return name; }
+  this.setSocialInsuranceNumber  = function(newSocialInsuranceNumber) { socialInsuranceNumber=newSocialInsuranceNumber; }
+
+  return this;
+}
+//instanciate the Person class
+var aPerson = new Person();
+//var myName = aPerson.name;  //this no longer works
+var myName = aPerson.getName();  //this does
+console.log(myName)
+*/
+
+//---------------------------------------------------------------------
+
+/*function Person() {
+  //properties/fields
+  var name = "Rob Gravelle";
+  var height = 68;
+  var weight = 170;
+  var socialInsuranceNumber = "555 555 555";
+
+  return {
+    setHeight: function(newHeight) {height=newHeight;},
+    getHeight: function() { return height; },
+    setWeight: function(newWeight) {weight = newWeight;},
+    getWeight: function() { return weight; },
+    setName:   function(newName) {name=newName;},
+    getName:   function() { return name; },
+    setSocialInsuranceNumber: function(newSocialInsuranceNumber) { socialInsuranceNumber=newSocialInsuranceNumber; }
+  };
+}
+
+//instanciate the Person class
+var aPerson = new Person();
+var myName = aPerson.getName();
+alert(myName); //prints "Rob Gravelle"*/
+
+
+//---------------------------------------------------------------------
+//adding the public members to the object's prototype is a lot more efficient. 
+//To do that, you have to create the basic object with all of its private data and then assign an interface object to the prototype property
+/*
+function Person() {
+  //properties/fields
+  var name = "Rob Gravelle";
+  var height = 68; //in inches
+  var weight = 170;
+  var socialInsuranceNumber = "555 555 555";
+}
+
+Person.prototype = {
+    setHeight: function(newHeight) {height=newHeight;},
+    getHeight: function() { return height; },
+    setWeight: function(newWeight) {weight=newWeight;},
+    getWeight: function() { return weight; },
+    setName:   function(newName) {name=newName;},
+    getName:   function() { return name; },
+    setSocialInsuranceNumber: function(newSocialInsuranceNumber) { socialInsuranceNumber=newSocialInsuranceNumber; } 
+};
+
+//instantiate the Person class
+var aPerson = new Person();
+aPerson.setWeight(220);
+alert(aPerson.getWeight());
+
+var aPerson2 = new Person();
+aPerson2.setWeight(185);  
+alert(aPerson2.getWeight());  //same function, different results
+
+*/
+//comment out setWeight to invoke error undefined
+//you'll notice that we called the setter before the getter. What that is doing is appending the _weight variable to the global namespace - not very private
+//"If you don't declare a variable explicitly, JavaScript will declare it implicitly for you." 
+
+//------------------------------------------------------------------------------
+//wrap the Person constructor and prototype inside a closure
+//It's created by including a set of parentheses around an anonymous function ( (function(args) {})(); ) that cause it to execute as inline code. It returns a Person class with the prototype already set:
+
+var Person = (function() {
+  //properties/fields
+  var name = "Rob Gravelle";
+  var height = 68; //in inches
+  var weight = 170;
+  var socialInsuranceNumber = "555 555 555";
+  
+  function oPerson() {}
+
+  oPerson.prototype = {
+    setHeight: function(newHeight) {height=newHeight;},
+    getHeight: function() { return height; },
+    setWeight: function(newWeight) {weight=newWeight;},
+    getWeight: function() { return weight; },
+    setName:   function(newName) {name=newName;},
+    getName:   function() { return name; },
+    setSocialInsuranceNumber: function(newSocialInsuranceNumber) { socialInsuranceNumber=newSocialInsuranceNumber; } 
+  };
+	
+  return oPerson;
+})();
+
+//Now the public methods can utilize the Person's private data:
+//instantiate the Person class
+var aPerson = new Person();
+//this displays "I am Rob Gravelle and I am 68 inches in height."
+alert("I am " + aPerson.getName() + " and I am " + aPerson.getHeight() + " inches in height.");
+
+
+
+
+
+
+</script>
+</body>
+</html>

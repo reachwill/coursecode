@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Javascript Template</title>
+
+    <style>
+        body {
+            font-family: arial;
+        }
+
+    </style>
+
+
+</head>
+
+<body>
+
+    <a href="digital-clock.html" class="loadLink">Load Clock</a>
+    <a href="datatables.html" class="loadLink">Load DataTables</a>
+    <a href="hide-show.html" class="loadLink">Load News</a>
+
+    <div id="target"></div>
+
+
+
+
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('.loadLink').click(function(e) {
+                e.preventDefault();
+                var url = $(this).attr('href');
+                $('#target').hide();
+                $('#target').load(url, function() {
+                    $('#target').fadeIn()
+                });
+            });
+        });
+
+    </script>
+
+
+</body>
+
+</html>

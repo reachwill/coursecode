@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>AJAX Example</title>
+
+    <style>
+        #details {
+            width: 320px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 15px;
+        }
+        
+        #details img {
+            width: 100%;
+        }
+
+    </style>
+
+
+
+</head>
+
+<body>
+
+    <select id="carsSelect"></select>
+    <div id="details">
+        <figure>
+            <img>
+            <figcaption></figcaption>
+        </figure>
+        <p class="cost"></p>
+    </div>
+
+
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            Communicator.getCarsData('data/cars.txt');
+
+            //listen for user changing selected item in carsSelect
+            $('#carsSelect').change(function() {
+                var selectedItem = $(this).find('option:selected');
+                $('#details').find('img').attr('src', 'images2/' + selectedItem.data('filename'));
+                $('#details').find('figcaption').html(selectedItem.data('caption'));
+                $('#details').find('.cost').html(selectedItem.data('cost'));
+
+
+            });
+
+        });
+
+
+        var Communicator = {
+            getCarsData: function(dataURL) {
+                $.ajax({
+                    url: dataURL,
+                    type: 'get',
+                    dataType: 'json',
+                    success: function(data) {
+
+                        //place in an option at top of carsSelect
+                        $('#carsSelect').append('<option value="default">Please select a car</option>');
+                        var numCars = data.cars.length;
+                        for (var i = 0; i < numCars; i++) {
+                            var option = '<option ';
+                            option += 'value="' + data.cars[i].id + '" ';
+                            option += 'data-fileName="' + data.cars[i].fileName + '" ';
+                            option += 'data-cost="' + data.cars[i].cost + '" ';
+                            option += 'data-caption="' + data.cars[i].caption + '" >';
+                            option += data.cars[i].caption + '</option>';
+                            $('#carsSelect').append(option);
+                        }
+                    },
+                    error: function(http, message, status) {}
+                });
+            }
+        };
+
+    </script>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Untitled Document</title>
+    <style>
+        .gridItem {
+            width: 200px;
+            height: 200px;
+            border: 1px solid black;
+            margin: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="wrapper">
+        <canvas id="canvas"></canvas>
+
+    </section>
+
+
+    <script>
+        var Shapes = {
+            Oval: function (gridItemId) {
+                var c = Shapes.createCanvas(gridItemId);
+                var ctx = c.getContext("2d");
+                ctx.beginPath();
+                ctx.arc(100, 75, 50, 0, 2 * Math.PI);
+                ctx.stroke();
+                return this;
+            },
+            Rect: function (gridItemId) {
+                var c = Shapes.createCanvas(gridItemId);
+                var ctx = c.getContext("2d");
+                ctx.fillRect(20, 20, 150, 100);
+            },
+            createCanvas: function (gridItemId) {
+                var mycanvas = document.createElement("canvas");
+                document.getElementById(gridItemId).appendChild(mycanvas);
+                return mycanvas;
+            }
+        }
+
+
+        var Widgets = {
+            Widget: function (type) {
+                var div = document.createElement("div");
+                div.className = 'gridItem';
+                div.id = 'gridItem' + document.querySelectorAll('.gridItem').length;
+                this.gridItemId = 'gridItem' + document.querySelectorAll('.gridItem').length;
+                this.type = type;
+                document.body.appendChild(div);
+                this.render();
+                return this;
+            }
+        }
+
+        Widgets.Widget.prototype.render = function () {
+            switch (this.type) {
+            case 'oval':
+                Shapes.Oval(this.gridItemId);
+                break;
+            case 'rect':
+                Shapes.Rect(this.gridItemId);
+                break;
+            }
+            return true;
+        }
+
+        var APP = {
+            init: function () {
+                this.createInstances();
+            },
+            createInstances: function () {
+                var ovalWidget = new Widgets.Widget('oval');
+                this.widgets.push(ovalWidget);
+
+
+                var rectWidget = new Widgets.Widget('rect');
+                this.widgets.push(rectWidget);
+            },
+            widgets: []
+        }
+
+        APP.init();
+    </script>
+
+</body>
+
+</html>

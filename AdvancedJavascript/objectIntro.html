@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Object Intro</title>
+</head>
+
+<body>
+
+<div id="clock"></div>
+
+<button id="foo" type="button">Click</button>
+
+
+<script src="jquery.1.9.0.min.js"></script>
+<script>
+/*var shape = { 
+    color : 'red',
+    borderThickness : '2.0'
+}*/
+
+
+function Shape(color, borderThickness) { 
+    this.color = color;
+    this.borderThickness = borderThickness;
+	return this;
+}
+
+Shape.prototype.describe = function() {
+    console.log("I am a " + this.color + " shape, with a border that is " +
+        this.borderThickness + " thick");
+};
+
+var shape = new Shape('red',2); 
+
+// ask it to describe itself
+shape.describe();
+
+// wire this method up to a DOM event handler
+//$('#foo').click(shape.describe); 
+//fix 1
+$('#foo').click(function() { shape.describe(); });
+
+
+var digitalClock = {
+	
+	element		:'clock',
+	updateTime	:function(){
+		var now = new Date();
+		var h	= digitalClock.formatNumber(now.getHours());
+		var m	= digitalClock.formatNumber(now.getMinutes());
+		var s	= digitalClock.formatNumber(now.getSeconds());
+		document.getElementById(digitalClock.element).innerHTML = h + ':' + m + ':' + s;
+	},
+	
+	formatNumber:function(num){
+		var numStr = num;
+		if(num < 10){
+			numStr = '0' + num;	
+		}
+		return numStr;
+	},
+	
+	init:(function(){setInterval(function(){digitalClock.updateTime()},1000)}())
+
+}
+
+
+
+</script>
+</body>
+</html>

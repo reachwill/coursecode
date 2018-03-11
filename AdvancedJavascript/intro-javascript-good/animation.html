@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Javascript Template</title>
+
+    <style>
+        body {
+            font-family: arial;
+        }
+        
+        #tools {
+            width: 300px;
+            height: 100px;
+            background: rgba(255, 0, 0, 0.5);
+            position: absolute;
+            right: 10px;
+        }
+        
+        #content {
+            width: 90%;
+            height: 4000px;
+            border: 1px solid #ccc;
+            background: green;
+        }
+
+    </style>
+
+
+</head>
+
+<body>
+
+    <div id="tools"></div>
+
+    <div id="content"></div>
+
+
+
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+
+            $(window).scroll(function() {
+                $('#tools').stop().animate({
+                    'top': $(document).scrollTop() + 20
+                }, 1500);
+            });
+
+        });
+
+    </script>
+
+
+</body>
+
+
+
+
+
+
+
+
+
+
+</html>

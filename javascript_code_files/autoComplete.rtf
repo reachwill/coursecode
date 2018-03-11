@@ -1,0 +1,269 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1038\cocoasubrtf360
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww9000\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\ql\qnatural\pardirnatural
+
+\f0\fs24 \cf0 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\
+<html xmlns="http://www.w3.org/1999/xhtml">\
+<head>\
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />\
+<title>Auto Complete</title>\
+<script type="text/javascript">\
+countries = new Array(\
+  "Afghanistan",\
+  "Albania",\
+  "Algeria",\
+  "Andorra",\
+  "Angola",\
+  "Antigua and Barbuda",\
+  "Argentina",\
+  "Armenia",\
+  "Australia",\
+  "Austria",\
+  "Azerbaijan",\
+  "Bahamas",\
+  "Bahrain",\
+  "Bangladesh",\
+  "Barbados",\
+  "Belarus",\
+  "Belgium",\
+  "Belize",\
+  "Benin",\
+  "Bhutan",\
+  "Bolivia",\
+  "Bosnia and Herzegovina",\
+  "Botswana",\
+  "Brazil",\
+  "Brunei",\
+  "Bulgaria",\
+  "Burkina Faso",\
+  "Burundi",\
+  "Cambodia",\
+  "Cameroon",\
+  "Canada",\
+  "Cape Verde",\
+  "Central African Republic",\
+  "Chad",\
+  "Chile",\
+  "China",\
+  "Colombia",\
+  "Comoros",\
+  "Congo (Brazzaville)",\
+  "Congo, Democratic Republic of the",\
+  "Costa Rica",\
+  "C\'f4te d'Ivoire",\
+  "Croatia",\
+  "Cuba",\
+  "Cyprus",\
+  "Czech Republic",\
+  "Denmark",\
+  "Djibouti",\
+  "Dominica",\
+  "Dominican Republic",\
+  "East Timor",\
+  "Ecuador",\
+  "Egypt",\
+  "El Salvador",\
+  "Equatorial Guinea",\
+  "Eritrea",\
+  "Estonia",\
+  "Ethiopia",\
+  "Fiji",\
+  "Finland",\
+  "France",\
+  "Gabon",\
+  "Gambia, The",\
+  "Georgia",\
+  "Germany",\
+  "Ghana",\
+  "Greece",\
+  "Grenada",\
+  "Guatemala",\
+  "Guinea",\
+  "Guinea-Bissau",\
+  "Guyana",\
+  "Haiti",\
+  "Honduras",\
+  "Hungary",\
+  "Iceland",\
+  "India",\
+  "Indonesia",\
+  "Iran",\
+  "Iraq",\
+  "Ireland",\
+  "Israel",\
+  "Italy",\
+  "Jamaica",\
+  "Japan",\
+  "Jordan",\
+  "Kazakhstan",\
+  "Kenya",\
+  "Kiribati",\
+  "Korea, North",\
+  "Korea, South",\
+  "Kuwait",\
+  "Kyrgyzstan",\
+  "Laos",\
+  "Latvia",\
+  "Lebanon",\
+  "Lesotho",\
+  "Liberia",\
+  "Libya",\
+  "Liechtenstein",\
+  "Lithuania",\
+  "Luxembourg",\
+  "Macedonia",\
+  "Madagascar",\
+  "Malawi",\
+  "Malaysia",\
+  "Maldives",\
+  "Mali",\
+  "Malta",\
+  "Marshall Islands",\
+  "Mauritania",\
+  "Mauritius",\
+  "Mexico",\
+  "Micronesia",\
+  "Moldova",\
+  "Monaco",\
+  "Mongolia",\
+  "Morocco",\
+  "Mozambique",\
+  "Myanmar",\
+  "Namibia",\
+  "Nauru",\
+  "Nepal",\
+  "Netherlands",\
+  "New Zealand",\
+  "Nicaragua",\
+  "Niger",\
+  "Nigeria",\
+  "Norway",\
+  "Oman",\
+  "Pakistan",\
+  "Palau",\
+  "Panama",\
+  "Papua New Guinea",\
+  "Paraguay",\
+  "Peru",\
+  "Philippines",\
+  "Poland",\
+  "Portugal",\
+  "Qatar",\
+  "Romania",\
+  "Russia",\
+  "Rwanda",\
+  "Saint Kitts and Nevis",\
+  "Saint Lucia",\
+  "Saint Vincent and The Grenadines",\
+  "Samoa",\
+  "San Marino",\
+  "Sao Tome and Principe",\
+  "Saudi Arabia",\
+  "Senegal",\
+  "Serbia and Montenegro",\
+  "Seychelles",\
+  "Sierra Leone",\
+  "Singapore",\
+  "Slovakia",\
+  "Slovenia",\
+  "Solomon Islands",\
+  "Somalia",\
+  "South Africa",\
+  "Spain",\
+  "Sri Lanka",\
+  "Sudan",\
+  "Suriname",\
+  "Swaziland",\
+  "Sweden",\
+  "Switzerland",\
+  "Syria",\
+  "Taiwan",\
+  "Tajikistan",\
+  "Tanzania",\
+  "Thailand",\
+  "Togo",\
+  "Tonga",\
+  "Trinidad and Tobago",\
+  "Tunisia",\
+  "Turkey",\
+  "Turkmenistan",\
+  "Tuvalu",\
+  "Uganda",\
+  "Ukraine",\
+  "United Arab Emirates",\
+  "United Kingdom",\
+  "United States",\
+  "Uruguay",\
+  "Uzbekistan",\
+  "Vanuatu",\
+  "Vatican City",\
+  "Venezuela",\
+  "Vietnam",\
+  "Western Sahara",\
+  "Yemen",\
+  "Zambia",\
+  "Zimbabwe"\
+);\
+\
+var sug = "";\
+var sug_disp = "";\
+\
+function getCountry() \{\
+  var input = document.forms['address_frm'].country.value;\
+  var len = input.length;\
+  sug_disp = ""; sug = "";\
+\
+  if (input.length) \{\
+    // get matching country from array\
+    for (ele in countries)\
+    \{\
+      if (countries[ele].substr(0,len).toLowerCase() == input.toLowerCase())\
+      \{\
+        sug_disp = input + countries[ele].substr(len);\
+        sug = countries[ele];\
+        break;\
+      \}\
+    \}\
+  \}\
+  document.forms['address_frm'].sug_country.value = sug_disp;\
+\}\
+\
+function setCountry() \{\
+  document.forms['address_frm'].country.value = sug;\
+  hideSug();\
+\}\
+\
+\
+\
+</script>\
+</head>\
+\
+<body>\
+\
+<form name="address_frm">\
+  Search for a destination:\
+  \
+  \
+  <div style="position: absolute; top: 20; left: 10; width: 200px; z-index: 1;">\
+    <input type="text" name="sug_country" style="background-color: #fff; color:#ccc; border: 1px solid #999; width: 200px; padding: 2px" />\
+  </div>\
+  \
+  <div style="position: absolute; top: 20; left: 10; width: 200px; z-index: 2;">\
+    <input type="text" name="country" style="background: none; color:#000; border: 1px solid #999; width: 200px; padding: 2px" onfocus="getCountry()" onkeyup="getCountry()" />\
+  </div>\
+  \
+ \
+    <input type="button" name="setBtn" value="select"  onclick="setCountry()" />\
+  \
+    \
+    \
+      \
+  \
+</form>\
+\
+\
+</body>\
+</html>\
+}

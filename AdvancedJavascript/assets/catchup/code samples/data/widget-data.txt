@@ -1,0 +1,53 @@
+{
+    "widgets": 
+
+        [
+            {
+                "type": "WidgetType1",
+                "multiple": "true",
+                "options": [{
+                    "label": "label1",
+                    "value": "value2"
+                    }, {
+                    "label": "label2",
+                    "value": "value2"
+                    }, {
+                    "label": "label3",
+                    "value": "value3"
+                    }],
+                "title": "1st Select Widget Title"
+            },
+            {
+                "type": "WidgetType1",
+                "multiple": "true",
+                "options": [{
+                    "label": "label1",
+                    "value": "value2"
+                    }, {
+                    "label": "label2",
+                    "value": "value2"
+                    }, {
+                    "label": "label3",
+                    "value": "value3"
+                    }],
+                "title": "2nd Select Widget Title"
+            },
+            {
+                "type": "WidgetType1",
+                "multiple": "true",
+                "options": [{
+                    "label": "label1",
+                    "value": "value2"
+                    }, {
+                    "label": "label2",
+                    "value": "value2"
+                    }, {
+                    "label": "label3",
+                    "value": "value3"
+                    }],
+                "title": "3rd Select Widget Title"
+            }
+
+        ]
+    
+}

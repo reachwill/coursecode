@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Javascript Template</title>
+
+    <style>
+        body {
+            font-family: arial;
+        }
+        
+        #map {
+            width: 400px;
+            height: 400px;
+            border: 1px solid #ccc;
+        }
+
+    </style>
+
+
+</head>
+
+<body>
+
+    <div id="map"></div>
+
+
+    <script src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
+
+    <script>
+        var map;
+
+        if (!navigator.geolocation) {
+            alert('You will remain lost until you update your browser!');
+        } else {
+            if (navigator.onLine) {
+                navigator.geolocation.getCurrentPosition(displayOnMap);
+            }
+        }
+
+        function displayOnMap(position) {
+            var mapOptions = {
+                zoom: 6,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            }
+            map = new google.maps.Map(document.getElementById('map'), mapOptions);
+            var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+            var infoWindow = new google.maps.InfoWindow({
+                map: map,
+                position: pos,
+                content: 'You are here'
+            })
+            map.setCenter(pos);
+        }
+
+    </script>
+
+
+</body>
+
+</html>

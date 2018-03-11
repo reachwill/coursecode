@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<!--CONFUSING WORLD OF THIS-->
+
+<head>
+    <meta charset="UTF-8">
+    <title>Untitled Document</title>
+</head>
+
+<body>
+    <button id="testBtn">Test</button>
+    <script>
+        //======== 1
+
+        function Shape(color, borderThickness) {
+            if (!(this instanceof Shape)) {
+                return new Shape(color, borderThickness);
+            }
+            this.color = color;
+            this.borderThickness = borderThickness;
+        }
+
+
+        Shape.prototype.describe = function () {
+            console.log("I am a " + this.color + " shape, with a border that is " +
+                this.borderThickness + " thick");
+        };
+
+
+        Shape.prototype.addWhenNeeded = function () {
+            alert('Add me when needed')
+        };
+
+        var shape = new Shape('red', 2.0);
+
+
+
+        var testBtn = document.getElementById('testBtn');
+        //testBtn.addEventListener('click', shape2.describe);//step 1
+        testBtn.addEventListener('click', function () {
+            shape.describe();
+        });
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Javascript Template</title>
+
+    <style>
+        #gallery img {
+            width: 100px;
+        }
+
+    </style>
+
+    <link rel="stylesheet" href="js/colorbox-master/example1/colorbox.css">
+
+</head>
+
+<body>
+
+    <div id="gallery">
+        <a href="images2/image1.jpeg" rel="maseratis"><img src="images2/image1.jpeg"></a>
+        <a href="images2/image2.jpeg" rel="maseratis"><img src="images2/image2.jpeg"></a>
+        <a href="images2/image3.jpeg" rel="maseratis"><img src="images2/image3.jpeg"></a>
+        <a href="images2/image4.jpeg" rel="maseratis"><img src="images2/image4.jpeg"></a>
+        <a href="images2/image5.jpeg" rel="maseratis"><img src="images2/image5.jpeg"></a>
+
+    </div>
+
+
+
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="js/colorbox-master/jquery.colorbox-min.js"></script>
+
+
+    <script>
+        $(document).ready(function() {
+            $('a[rel=maseratis]').colorbox({
+                width: '50%',
+                maxWidth: '860px',
+                slideshow: true
+            });
+        });
+
+    </script>
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>

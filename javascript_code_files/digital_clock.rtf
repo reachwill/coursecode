@@ -1,0 +1,60 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1038\cocoasubrtf360
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww9000\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\ql\qnatural\pardirnatural
+
+\f0\fs24 \cf0 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\
+<html xmlns="http://www.w3.org/1999/xhtml">\
+<head>\
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />\
+<title>Digital Clock</title>\
+<script type="text/javascript">\
+<!--\
+function formatNumber(num)\
+\{\
+	if(num < 10)\
+	\{\
+		num = "0" + num;\
+	\}\
+	return num;\
+\}\
+\
+formatNumber(5)\
+\
+function updateClock()\
+\{\
+	var dTime=new Date();\
+	var h=formatNumber(dTime.getHours());\
+	var m=formatNumber(dTime.getMinutes());\
+	var s=formatNumber(dTime.getSeconds());\
+	document.getElementById("clock").innerHTML=h+":"+m+":"+s;\
+\}\
+\
+function init()\
+\{\
+	setInterval(updateClock,1000);	\
+\}\
+\
+window.onload=init;\
+//-->\
+</script>\
+\
+<style type="text/css">\
+#clock\{\
+	font-family:Arial, Helvetica, sans-serif;\
+	color:#096;\
+	font-size:4em;\
+	float:right;\
+\}\
+</style>\
+</head>\
+\
+<body>\
+\
+<div id="clock"></div>\
+\
+\
+</body>\
+</html>\
+}

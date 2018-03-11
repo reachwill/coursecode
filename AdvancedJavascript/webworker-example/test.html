@@ -1,0 +1,47 @@
+<html>
+
+<head>
+    <title>Will</title>
+</head>
+
+<body>
+    
+    <div id="test"></div>
+    <div id="process"></div>
+    <button id="startBtn">start</button>
+    <script src="js/jquery.min.js"></script>
+    <script>
+        
+        var i = 0;
+        
+        setInterval(function(){
+            i+=1;
+            document.getElementById('test').innerHTML = i;
+        },500);
+        
+        var worker = new Worker('worktest.js');
+    
+        $(document).ready(function(){
+            
+            $('#startBtn').click(function(){
+//                for(var i=0;i<100000;i++){
+//                    //$('#process').html(i);
+//                    console.log(i)
+//                }
+                worker.postMessage({});
+            });
+            
+            
+            
+            
+        });
+    
+    </script>
+    
+    
+    
+</body>
+
+
+
+</html>

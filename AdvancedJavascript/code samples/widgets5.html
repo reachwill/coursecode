@@ -1,0 +1,110 @@
+<!doctype html>
+
+<!--NAMSPACING------------------------>
+
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Inheritance</title>
+    <style>
+        .gridItem {
+            width: 200px;
+            height: 200px;
+            border: 1px solid black;
+            margin: 10px;
+            float: left;
+        }
+        
+        body {
+            font-family: arial;
+        }
+        
+        h2 {
+            margin: 0;
+            padding: 5px;
+            background-color: cadetblue;
+            color: azure
+        }
+    </style>
+</head>
+
+<body>
+
+
+
+    <script>
+        var WidgetNS = {
+            widgetsArray: [],
+            Widget: function (isDraggable, width, height) {
+                this.isDraggable = isDraggable || false;
+                (this.isDraggable ? this.class = 'draggable' : this.class = '');
+                this.width = width || 'auto';
+                this.height = height || 'auto';
+            },
+            WidgetType1: function (multipleSelect, selectOptions, title) {
+                this.multipleSelect = multipleSelect;
+                this.selectOptions = selectOptions;
+                this.title = title || 'Untitled';
+                WidgetNS.Widget.prototype.registerWidget.call(this, this);
+                WidgetNS.Widget.prototype.renderWidgetContainer.call(this, this);
+                //Widget.prototype.renderType1Contents();//show difference using call
+                WidgetNS.Widget.prototype.renderType1Contents.call(this, this);
+            }
+        }
+
+        WidgetNS.Widget.prototype.registerWidget = function (widget) {
+            WidgetNS.widgetsArray.push(widget);
+        };
+
+        WidgetNS.Widget.prototype.renderWidgetContainer = function () {
+            var div = document.createElement("div");
+            div.className = 'gridItem';
+            div.id = 'gridItem' + document.querySelectorAll('.gridItem').length;
+            div.style.width = this.width + 'px';
+            div.style.height = this.height + 'px';
+            this.gridItemId = 'gridItem' + document.querySelectorAll('.gridItem').length;
+            document.body.appendChild(div);
+        };
+
+        WidgetNS.WidgetType1.prototype = new WidgetNS.Widget(true, 300, 300); //What we have set up here is an inheritance chain from Widget to WidgetType1
+
+
+        WidgetNS.Widget.prototype.renderType1Contents = function () {
+            var thisDiv = document.getElementById(this.gridItemId);
+
+            var title = document.createElement("h2");
+            title.innerHTML = this.title;
+            thisDiv.appendChild(title);
+
+            //Create array of options to be added
+            var array = this.selectOptions;
+
+            //Create and append select list
+            var selectList = document.createElement("select");
+            selectList.id = "mySelect";
+            thisDiv.appendChild(selectList);
+
+            //Create and append the options
+            for (var i = 0; i < array.length; i++) {
+                var option = document.createElement("option");
+                option.value = array[i].value;
+                option.text = array[i].label;
+                selectList.appendChild(option);
+            }
+        };
+
+        var w1 = new WidgetNS.WidgetType1(true, [{
+            'label': 'label1',
+            'value': 'value2'
+        }, {
+            'label': 'label2',
+            'value': 'value2'
+        }, {
+            'label': 'label3',
+            'value': 'value3'
+        }], 'Title of Widget');
+    </script>
+</body>
+
+</html>

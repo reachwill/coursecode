@@ -1,0 +1,63 @@
+.gridItem {
+    width: 200px;
+    height: 200px;
+    border: 1px solid black;
+    margin: 10px;
+    float: left;
+    padding: 10px;
+}
+
+.draggable {
+    cursor: pointer;
+}
+
+body {
+    font-family: arial;
+}
+
+h2 {
+    margin: 0;
+    padding: 5px;
+    background-color: cadetblue;
+    color: azure;
+    font-size: 1em;
+}
+
+select {
+    width: 95%;
+    height: 45px;
+    margin: 10px;
+    border: 1px solid #333;
+    padding: 4px;
+}
+
+button {
+    margin: 10px;
+}
+
+#dropzone {
+    width: 100px;
+    height: 100px;
+    border: 1px solid #333;
+    background: url(img/bin.png) no-repeat;
+    background-size: 100% 100%;
+    font-size: 1.5em;
+    color: black;
+    text-align: center;
+    padding: 5px;
+    margin: 10px;
+    font-family: impact;
+    font-weight: bold;
+}
+
+.chart {
+    margin: 140px 0;
+    width: 100% !important;
+    height: auto !important;
+}
+
+#tools {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}

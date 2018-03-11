@@ -1,0 +1,134 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Inheritance</title>
+    <style>
+        .gridItem {
+            width: 200px;
+            height: 200px;
+            border: 1px solid black;
+            margin: 10px;
+            float: left;
+        }
+    </style>
+</head>
+
+<body>
+
+
+
+    <script>
+        var widgetsArray = [];
+
+        /*
+        1. Create constructor function for Widget
+        2. Create constructor function WidgetType1
+        3. Set up dynamic inheritance (this ensures that when you add a property to “Widget”, an instance of WidgetType1 inherits that property)
+        4. Extend WidgetType1 using prototype
+        5. Create a new instance of WidgetType1 – myWidget
+        6. Extend Widget Class using prototype
+        */
+
+        //1
+        function Widget(isDraggable, width, height) {
+            this.isDraggable = isDraggable || false;
+            //(this.isDraggable ? this.class = 'draggable' : this.class = '');
+            this.width = width || 'auto';
+            this.height = height || 'auto';
+        }
+
+        Widget.prototype.registerWidget = function (widget) { widgetsArray.push(widget) }; Widget.prototype.renderWidgetContainer = function (parent) { var div = document.createElement("div"); div.className = 'gridItem'; div.id = 'gridItem' + document.querySelectorAll('.gridItem').length; this.gridItemId = 'gridItem' + document.querySelectorAll('.gridItem').length; document.body.appendChild(div); };
+
+
+        //2
+        function WidgetType1(multipleSelect, selectOptions, title) {
+            this.multipleSelect = multipleSelect;
+            this.selectOptions = selectOptions;
+            this.title = title || 'Untitled';
+            Widget.prototype.registerWidget.call(this, this);
+            Widget.prototype.renderWidgetContainer.call(this, this);
+            //Widget.prototype.renderType1Contents(); //show difference using call
+            Widget.prototype.renderType1Contents.call(this, this);
+        }
+
+        Widget.prototype.renderType1Contents = function () {
+            var thisDiv = document.getElementById(this.gridItemId);
+            //Create array of options to be added
+            var array = this.selectOptions;
+
+            //Create and append select list
+            var selectList = document.createElement("select");
+            selectList.id = "select" + document.querySelectorAll('.gridItem').length;
+            thisDiv.appendChild(selectList);
+
+            //Create and append the options
+            for (var i = 0; i < array.length; i++) {
+                var option = document.createElement("option");
+                option.value = array[i].value;
+                option.text = array[i].label;
+                selectList.appendChild(option);
+            }
+        };
+
+        //3
+        WidgetType1.prototype = new Widget(true); //What we have set up here is an inheritance chain from Widget to WidgetType1
+
+        function WidgetType2(autoComplete, autoCompleteOptions, title) {
+            this.autoComplete = autoComplete;
+            this.autoCompleteOptions = autoCompleteOptions;
+            this.title = title || 'Untitled';
+            Widget.prototype.registerWidget.call(this, this);
+            Widget.prototype.renderWidgetContainer.call(this, this);
+        }
+
+        //3
+        WidgetType2.prototype = new Widget(true); //What we have set up here is an inheritance chain from Widget to WidgetType1
+
+        //4
+
+        Widget.prototype.displayWidgetProps = function () {
+                console.log('Draggable: ' + this.isDraggable + ', Multiple Select: ' + this.multipleSelect + ', Options: ' + this.selectOptions + ', Title: ' + this.title + ', Visible: ' + this.isVisible + ', CSS Class Name: ' + this.class + ', Width: ' + this.width + ', Height: ' + this.height);
+            } //We have extended the functionality of Widget
+
+
+        var myWidget = new WidgetType1(true, [{
+            'label': 'label1',
+            'value': 'value2'
+        }, {
+            'label': 'label2',
+            'value': 'value2'
+        }, {
+            'label': 'label3',
+            'value': 'value3'
+        }], 'Widget Title');
+        myWidget.width = '25%';
+
+
+
+
+        var anotherWidget = new WidgetType1(false, [{
+            'label': 'label1',
+            'value': 'value2'
+        }, {
+            'label': 'label2',
+            'value': 'value2'
+        }, {
+            'label': 'label3',
+            'value': 'value3'
+        }], 'Another Widget Title');
+        anotherWidget.width = '45%';
+
+        var widget2 = new WidgetType2(true, ['Uk', 'Germany', 'France'], 'Title For WidgetType2');
+        widget2.width = '45%';
+
+
+        Widget.prototype.isVisible = true; //Widget class has been extended
+
+
+        //myWidget.displayWidgetProps();
+    </script>
+</body>
+
+</html>

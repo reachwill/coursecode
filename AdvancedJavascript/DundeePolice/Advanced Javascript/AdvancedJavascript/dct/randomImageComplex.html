@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Display Random Image from Array</title>
+</head>
+
+<body>
+	<header>
+    	<figure>
+    		<img id="bannerImg" width="640">
+        	<figcaption id="bannerCaption"></figcaption>
+        </figure>
+        
+        <button id="randomBtn">Get Image</button>
+    </header>
+
+<script>
+document.getElementById('randomBtn').addEventListener('click',getRandomImage);
+function getRandomImage(e){
+	//create an array to store references to images
+	var imagesArray = [
+		{"filename":"image1.jpeg","caption":"A very nice car","cost":"95000"},
+		{"filename":"image2.jpeg","caption":"A very nice car from behind","cost":"85000"},
+		{"filename":"image3.jpeg","caption":"A very fast car","cost":"195000"},
+		{"filename":"image4.jpeg","caption":"A even faster car","cost":"295000"},
+		{"filename":"image5.jpeg","caption":"The fastest car of all","cost":"395000"}
+	
+	];
+	var numImages = imagesArray.length;
+	var randomNum = Math.floor(Math.random()*numImages);
+	//console.log(imagesArray[randomNum]);
+	document.getElementById('bannerImg').src = 'images2/' + imagesArray[randomNum].filename;
+	document.getElementById('bannerCaption').innerHTML = imagesArray[randomNum].caption;
+	//hide button
+	document.getElementById(e.target.id).style.display = 'none';
+}
+
+
+
+</script>
+
+
+</body>
+</html>

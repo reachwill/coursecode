@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+</head>
+
+<body>
+
+    <div ng-app="" ng-controller="playerController">
+
+        <p>Filtering input:</p>
+
+        <p>
+            <input type="text" ng-model="test">
+        </p>
+
+        <ul>
+            <li ng-repeat="x in names | filter:test | orderBy:'name'">
+                {{ (x.name | uppercase) + ', ' + x.position }}
+            </li>
+        </ul>
+
+    </div>
+
+
+
+    <script>
+        function playerController($scope) {
+            $scope.names = [
+                {
+                    name: 'Stevie',
+                    position: 'CM',
+                    wage: 95000
+                },
+                {
+                    name: 'Raheem',
+                    position: 'LA',
+                    wage: 95000
+                },
+                {
+                    name: 'Dan',
+                    position: 'CA',
+                    wage: 95000
+                }
+    ];
+
+        }
+    </script>
+</body>
+
+</html>

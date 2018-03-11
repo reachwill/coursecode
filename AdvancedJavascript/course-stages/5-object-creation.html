@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+<!--PLAIN OLD JAVASCRIPT OBJECT-->
+
+<head>
+    <meta charset="UTF-8">
+    <title>Untitled Document</title>
+</head>
+
+<body>
+
+    <script>
+        //======== 1
+        function Shape(color, borderThickness) {
+            this.color = color;
+            this.borderThickness = borderThickness;
+            //show how omitting the --this-- keyword hides the function?
+            //            describe = function () {
+            //                console.log("I am a " + this.color + " shape, with a border that is " +
+            //                    this.borderThickness + " thick");
+            //            };
+            this.describe = function () {
+                console.log("I am a " + this.color + " shape, with a border that is " +
+                    this.borderThickness + " thick");
+            };
+
+            return this; ///argghhhhhhh Window namespace!!
+        }
+
+        // show not using --new-- in console.
+        //        var shape = Shape('red', 2.0);
+        //        console.log(shape)
+
+        //add return this to Shape constructor
+
+
+        //var shape = new Shape('red', 2.0);
+
+
+
+        //=========== 2 -- Best to use the constructor's prototype
+        //        Shape.prototype.describe = function () {
+        //            console.log("I am a " + this.color + " shape, with a border that is " +
+        //                this.borderThickness + " thick");
+        //        };
+
+
+        //        Shape.prototype.addWhenNeeded = function () {
+        //            alert('Add me when needed')
+        //        };
+
+        //        var shape = new Shape('red', 2.0);
+
+
+
+
+        //============== 3 -- demo instanceof to safeguard when --new-- not used
+
+        //        function Shape(color, borderThickness) {
+        //             if (!(this instanceof Shape)) {
+        //                 return new Shape(color, borderThickness);
+        //             }
+        //             this.color = color;
+        //             this.borderThickness = borderThickness;
+        //         }
+    </script>
+
+</body>
+
+</html>

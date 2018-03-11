@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <style>
+      body {
+        margin: 0px;
+        padding: 0px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container"></div>
+    <script src="http://d3lp1msu2r81bx.cloudfront.net/kjs/js/lib/kinetic-v5.0.1.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.2.1/moment.min.js"></script>
+    <script src="http://d3lp1msu2r81bx.cloudfront.net/mc/js/lib/meteorcharts-v0.1.0.min.js"></script>
+    <script defer> 
+      var lineChart = new MeteorChart({
+        container: 'container',
+        width: 500,
+        height: 300,
+        data: {
+			
+          line: {
+            unit: {
+              x: 'Number',
+              y: 'Number'
+            },
+            series: [
+              {
+                title: 'Series 1',
+                points: [
+                  -100, -100,
+                  100, 100,
+                  200, 50
+                ]
+              },
+			  {
+                title: 'Series 2',
+                points: [
+                  -50, -50,
+                  100, 100,
+                  200, 50
+                ]
+              }
+            ]
+          }
+        },
+        theme: MeteorChart.Themes.CoteAzur,
+        layout: MeteorChart.Layouts.StandardLineChart,
+		
+        interaction: MeteorChart.Interactions.LineChartTooltip
+      });
+    </script>
+  </body>
+</html>

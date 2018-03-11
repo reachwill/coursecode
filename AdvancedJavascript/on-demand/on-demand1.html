@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>External Script on Demand</title>
+</head>
+
+<body>
+
+<button id="testBtn" type="button">Test</button>
+
+<input type="text" id="aTextField">
+
+
+
+<script>
+
+document.getElementById('testBtn').addEventListener('click',function(){
+	
+	ScriptLoader.loadScript('ext1.js','alerter');
+
+});
+
+var ScriptLoader = {
+	
+	loadScript:function(url,tagId){
+		if(!document.getElementById(tagId)){
+			var newScript = document.createElement('script');
+			newScript.type = 'text/javascript';
+			newScript.src = 'ext1.js';
+			newScript.id = tagId;
+			document.body.appendChild(newScript);
+		}else{
+			alert('already loaded')	
+		}
+	}
+}
+
+
+
+
+    
+</script>
+
+
+</body>
+</html>

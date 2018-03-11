@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Random Image</title>
+</head>
+
+<body>
+
+<figure>
+    <img id="bannerImg" width="25%" src="">
+    <figcaption id="bannerCaption"></figcaption>
+</figure>
+
+
+
+<script>
+//create an array of images
+var images = ['image1.jpeg','image2.jpeg','image3.jpeg','image4.jpeg','image5.jpeg'];
+var numImages = images.length;
+var randomNum = Math.floor(Math.random() * numImages);
+//console.log(randomNum)
+document.getElementById('bannerImg').src = 'images2/' + images[randomNum];
+document.getElementById('bannerCaption').innerHTML = images[randomNum];
+
+
+</script>
+
+</body>
+</html>

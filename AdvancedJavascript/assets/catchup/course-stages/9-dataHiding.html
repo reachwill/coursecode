@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Untitled Document</title>
+</head>
+
+<body>
+    <script>
+        function Person() {
+                //properties/fields
+                var name = "Will";
+                var height = 85;
+                var weight = 90;
+
+                //methods/actions
+                this.setHeight = function (newHeight) {
+                    this.height = height;
+                }
+                this.getHeight = function () {
+                    return this.height;
+                }
+                this.setWeight = function (newWeight) {
+                    this.weight = weight;
+                }
+                this.getWeight = function () {
+                    return this.weight;
+                }
+                this.setName = function (newName) {
+                    this.name = name;
+                }
+                this.getName = function () {
+                    return this.name;
+                }
+
+                return this;
+            }
+            //instanciate the Person class
+        var aPerson = new Person();
+        var myName = aPerson.getName();
+        aPerson.setName("mud");
+ 
+        var myName = aPerson.getName();
+    </script>
+</body>
+
+</html>

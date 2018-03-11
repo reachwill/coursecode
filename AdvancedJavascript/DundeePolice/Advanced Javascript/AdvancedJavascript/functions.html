@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Functions</title>
+</head>
+
+<body>
+<div id="test"><p>Paragraph 1</p><p>Paragraph 2</p></div>
+
+
+<script>
+function add(x, y) {
+    var total = x + y;
+    return total;
+}
+console.log(add(2, 3, 4));
+//add(2, 3, 4)
+
+//------------------------------------------------------------------------
+
+function add() {
+    var sum = 0;
+    for (var i = 0, j = arguments.length; i < j; i++) {
+        sum += arguments[i];
+    }
+    return sum;
+}
+
+console.log(add(2, 3, 4, 5));
+
+//------------------------------------------------------------------------
+
+function avg() {
+    var sum = 0;
+    for (var i = 0, j = arguments.length; i < j; i++) {
+        sum += arguments[i];
+    }
+    return sum / arguments.length;
+}
+
+console.log(avg(2, 3, 4, 5));
+
+//------------------------------------------------------------------------
+
+function avgArray(arr) {
+    var sum = 0;
+    for (var i = 0, j = arr.length; i < j; i++) {
+        sum += arr[i];
+    }
+    return sum / arr.length;
+}
+
+console.log(avgArray([2, 3, 4, 5]));
+
+//------------------------------------------------------------------------
+
+var avg = function() {
+    var sum = 0;
+    for (var i = 0, j = arguments.length; i < j; i++) {
+        sum += arguments[i];
+    }
+    return sum / arguments.length;
+}
+
+console.log('anony '+avg(2, 3, 4, 5));
+
+//------------------------------------------------------------------------
+
+
+var a = 1;
+var b = 2;
+(function() {
+    var b = 3;
+    a += b;
+})();
+
+console.log(a + '-' + b);
+
+//------------------------------------------------------------------------
+
+function countChars(elm) {
+    if (elm.nodeType == 3) { // TEXT_NODE
+        return elm.nodeValue.length;
+    }
+    var count = 0;
+    for (var i = 0, child; child = elm.childNodes[i]; i++) {
+        count += countChars(child);
+    }
+    return count;
+}
+
+console.log(countChars(document.getElementById('test')));
+
+//------------------------------------------------------------------------
+
+
+</script>
+
+</body>
+</html>

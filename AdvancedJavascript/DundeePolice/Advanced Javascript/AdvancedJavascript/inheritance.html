@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Inheritance</title>
+</head>
+
+<body>
+
+
+
+<script>
+/*
+1. Create constructor function for Vehicle
+2. Create constructor function Car
+3. Set up dynamic inheritance (this ensures that when you add a property to “Vehicle”, an instance of Car inherits that property)
+4. Extend Car using prototype
+5. Create a new instance of Car – my Subaru
+6. Extend Vehicle using prototype
+*/
+
+//1
+function Vehicle(hasEngine, hasWheels) {
+    this.hasEngine = hasEngine || false;
+    this.hasWheels = hasWheels || false;
+}
+
+//2
+function Car (make, model, hp) {    
+    this.hp = hp;
+    this.make = make;
+    this.model = model;
+}
+
+//3
+Car.prototype = new Vehicle(true, true);//What we have set up here is an inheritance chain from Vehicle to Car
+
+//4
+Car.prototype.displaySpecs = function () {
+    console.log(this.make + ", " + this.model + ", " + this.hp + ", " + this.hasEngine + ", " + this.hasWheels);
+}//We have extended the functionality of Car
+
+var mySubaru = new Car ("Subaru", "Forester", 220);
+
+Vehicle.prototype.hasSteeringWheel = true;
+
+console.log(mySubaru.hasSteeringWheel); // logs: true
+
+
+//mySubaru.displaySpecs();
+
+
+</script>
+</body>
+</html>

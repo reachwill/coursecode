@@ -1,0 +1,18 @@
+{"products":[
+	{"prodName":"iPad2",
+	"prodDescription":"Still very nice.",
+	"prodCost":"250.00"},
+	
+	{"prodName":"iPad3",
+	"prodDescription":"Brighter than iPad2.",
+	"prodCost":"499.00"},
+	
+	{"prodName":"Motorola Xoom",
+	"prodDescription":"Not as good as they say.",
+	"prodCost":"400.00"},
+	
+	{"prodName":"Nexus 7 8GB",
+	"prodDescription":"Best value tablet.",
+	"prodCost":"159.99"}
+	]
+}

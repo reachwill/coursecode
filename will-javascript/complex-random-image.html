@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Javascript Template</title>
+    <style>
+        #imgBanner {
+            width: 320px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <figure>
+        <img id="imgBanner">
+        <figcaption id="bannerCaption"></figcaption>
+    </figure>
+
+
+
+    <script>
+        //declare an array of image names to act as a datasource for the banner
+
+
+        var images = [{
+            fileName: 'image1.jpeg',
+            caption: 'Front view of Gran Turismo',
+            cost: 95000
+        }, {
+            fileName: 'image2.jpeg',
+            caption: 'Rear view of Gran Turismo',
+            cost: 95000
+        }, {
+            fileName: 'image3.jpeg',
+            caption: 'A fast Maserati',
+            cost: 125000
+        }, {
+            fileName: 'image4.jpeg',
+            caption: 'A really fast Maserati',
+            cost: 295000
+        }, {
+            fileName: 'image5.jpeg',
+            caption: 'The fastest Maserati',
+            cost: 995000
+        }];
+
+        console.log(images[0].fileName);
+
+        //generate a random number to use to select a random image
+        var randomNum = Math.floor(Math.random() * images.length);
+        //now use randomNum to select a random image
+        document.getElementById('imgBanner').src = 'images2/' + images[randomNum].fileName;
+        document.getElementById('bannerCaption').innerHTML = images[randomNum].caption;
+
+    </script>
+
+
+
+</body>
+
+
+
+
+
+
+
+
+
+
+</html>

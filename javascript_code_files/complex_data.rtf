@@ -1,0 +1,81 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1038\cocoasubrtf360
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww9000\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\ql\qnatural\pardirnatural
+
+\f0\fs24 \cf0 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\
+<html xmlns="http://www.w3.org/1999/xhtml">\
+<head>\
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />\
+<title>Handling Complex Data</title>\
+<script type="text/javascript">\
+<!--\
+//=================================================\
+//DATA MODEL=======================================\
+var trips = new Array();\
+\
+Trip = function(name,description,cost)\
+\{\
+	this.tripName=name;\
+	this.description=description;\
+	this.cost=cost;\
+	trips.push(this);\
+\}\
+\
+function buildObjects()\
+\{\
+	var trip1=new Trip("Edinburgh","Windy and dug up","295.00");\
+	var trip2=new Trip("Glasgow","Rainy and dug up","245.00");\
+	var trip3=new Trip("Nottingham","Robin Hood's stomping ground","267.00");\
+	var trip3=new Trip("Stirling","Gateway to the Raploch","67.00");\
+	var trip4=new Trip("Aberdeen","Gateway to the Highlasnds","667.00");\
+\}\
+\
+buildObjects();\
+\
+/*for(var i=0 ; i<trips.length ; i++)\
+\{\
+	document.write(trips[i].tripName + "<br/>");	\
+\}\
+*/\
+\
+//=================================================\
+//CONTROLLER\
+function showDetails()\
+\{\
+	var selectedTrip=document.tripsForm.tripsMenu.selectedIndex;\
+	document.getElementById("description").innerHTML=trips[selectedTrip].description;\
+	document.getElementById("cost").innerHTML=trips[selectedTrip].cost;\
+	document.getElementById("weblink").innerHTML="<a href=\\"http://www."+trips[selectedTrip].tripName+".co.uk\\" target=\\"_blank\\">"+trips[selectedTrip].tripName+"</a>";\
+\}\
+\
+//-->\
+</script>\
+</head>\
+\
+<body>\
+\
+<form name="tripsForm">\
+	\
+    <select name="tripsMenu" onchange="showDetails()">\
+		<script type="text/javascript">\
+		<!--\
+			for(var i=0;i<trips.length;i++)\
+			\{\
+				document.write("<option value=\\""+trips[i].tripName+"\\">"+trips[i].tripName+"</option>");	\
+			\}\
+		//-->\
+		</script>\
+    </select>\
+</form>\
+\
+<div id="weblink"></div>\
+<div id="description"></div>\
+<div id="cost"></div>\
+\
+\
+\
+</body>\
+</html>\
+}

@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  div.container
+    h1= message
+    a(href='/') Home
+    ul.users
+      each user in results
+        li.user(data-name=user.name)= user.name + ":"
+          ul
+            each thing in user.things
+              li= thing

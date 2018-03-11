@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+  <script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.min.js"></script>
+ 
+  <script id="text-template" type="text/x-handlebars-template">
+    <h2>{{title}}</h2>
+    <h3>{{description}}</h3>
+    <ul>
+    {{#each articles}}
+        <li><a href="{{url}}">{{title}}</a></li>
+    {{/each}}
+    </ul>
+  </script>
+  
+  
+  
+  <script id="carsTable-template" type="text/x-handlebars-template"> 
+      {{#each cars}}
+           <tr>
+               <td>
+                   {{make}}
+               </td>
+               <td>
+                   {{model}}
+               </td>
+                  <td>
+                   {{description}}
+               </td>
+                  <td>
+                   {{cost}}
+               </td>
+                <td>
+                   <a href="#" data-id="{{id}}">Buy</a>
+               </td>
+           </tr>
+        {{/each}}
+  </script>
+ 
+
+
+<h1 id="title"></h1>
+<hr>
+<div id="text"></div>
+
+
+
+<div>
+      <table id="carsTable">
+          <thead>
+              <tr>
+                  <th>Make</th>
+                  <th>Model</th>
+                  <th>Description</th>
+                  <th>Cost</th>
+                  <th>Buy</th>
+              </tr>
+          </thead>
+          <tbody id="carsTableBody"></tbody>
+      </table>
+</div>
+
+
+ 
+<script src="ajax.js"></script>
+    
+</body>
+</html>

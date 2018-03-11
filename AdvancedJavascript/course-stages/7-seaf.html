@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<!--SEAF-->
+
+<head>
+    <meta charset="UTF-8">
+    <title>Untitled Document</title>
+</head>
+
+<body>
+
+    <script>
+        //======== 1
+
+        (function () {
+            var foo = 'Hello';
+            var bar = 'World!'
+
+            function getMessage() {
+                return foo + ' ' + bar;
+            }
+
+            window.getMessage = getMessage; //Assign 'getMessage' to the global variable 'getMessage'...
+        })();
+
+        console.log(getMessage()); //...and now this works.
+
+        //It's important to note that these still won't work: 
+        //console.log(foo);
+        //console.log(bar);
+    </script>
+
+</body>
+
+</html>

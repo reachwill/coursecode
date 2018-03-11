@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+</head>
+
+<body>
+
+    <div ng-app="" ng-init="names=[{name:'Stevie',position:'CM'},{name:'Raheem',position:'LA'},{name:'Dan',position:'CF'}]">
+
+        <ul>
+            <li ng-repeat="x	in names">
+                {{ x.name + ' - ' + x.position }}
+            </li>
+        </ul>
+
+    </div>
+</body>
+
+</html>

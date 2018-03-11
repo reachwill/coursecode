@@ -1,0 +1,9 @@
+extends layout
+
+block content
+
+    h1= message
+    form(action="/send",method="post")
+      input(type="text",name="user[name]")
+      input(type="text",name="user[email]")
+      button(type="submit") Send

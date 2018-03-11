@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Untitled Document</title>
+</head>
+
+<body>
+
+    <script>
+        /*var foo = 'Hello';
+                var bar = 'World!';
+
+                function baz() {
+                    return foo + ' ' + bar;
+                }
+
+                console.log(baz());*/
+
+
+
+
+        (function () {
+            var foo = 'Hello';
+            var bar = 'World!'
+
+            function baz() {
+                return foo + ' ' + bar;
+            }
+
+            function showLoading() {
+                alert(foo);
+            }
+
+
+            window.baz = baz; //Assign 'baz' to the global variable 'baz'...
+            window.showLoading = showLoading;
+        })();
+
+        console.log(baz()); //...and now this works.
+        showLoading();
+        //It's important to note that these still won't work: 
+        console.log(foo);
+        console.log(bar);
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Raphaël · Reflection</title>
+<script src="../canvasJS/raphael-min.js"></script>
+<script>
+        Raphael(function () {
+    var img = document.getElementById("photo");
+    img.style.display = "none";
+    var r = Raphael("holder", 600, 540);
+    
+    r.image(img.src, 140, 140, 320, 240);
+    r.image(img.src, 140, 380, 320, 240).attr({
+        transform: "s1-1",
+        opacity: .5
+    });
+    
+});
+        </script>
+<style media="screen">
+body {
+	background: #333;
+}
+</style>
+</head>
+<body>
+<div id="holder"> <img id="photo" src="../images2/image2.jpeg" width="320" height="240" alt="Test" /> </div>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Javascript Template</title>
+
+
+
+    <link rel="stylesheet" href="js/jquery-ui-1.11.4.custom/jquery-ui.min.css">
+
+    <style>
+        body {
+            font-family: arial;
+        }
+        
+        #accordion,
+        #tabs {
+            width: 400px;
+            font-size: 0.85em;
+        }
+        
+        #tabs .ui-widget-content {
+            background-color: green;
+        }
+
+    </style>
+
+
+</head>
+
+<body>
+
+    <div id="accordion">
+        <div>
+            <h3>Section 1</h3>
+            <p>Section 1 content</p>
+        </div>
+        <div>
+            <h3>Section 2</h3>
+            <p>Section 2 content</p>
+        </div>
+        <div>
+            <h3>Section 3</h3>
+            <p>Section 3 content</p>
+        </div>
+        <div>
+            <h3>Section 4</h3>
+            <p>Section 4 content</p>
+        </div>
+        <div>
+            <h3>Section 5</h3>
+            <p>Section 5 content</p>
+        </div>
+    </div>
+
+
+    <div id="tabs">
+        <ul>
+            <li><a href="#page1">Page 1</a></li>
+            <li><a href="#page2">Page 2</a></li>
+            <li><a href="#page3">Page 3</a></li>
+        </ul>
+        <div id="page1">
+            <h2>Page 1</h2>
+            <input type="text" id="startdate">
+        </div>
+        <div id="page2">
+            <h2>Page 2</h2>
+            <input type="text" id="county">
+        </div>
+        <div id="page3">
+            <h2>Page 3</h2>
+        </div>
+    </div>
+
+
+
+
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="js/jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
+
+    <script>
+        var counties = ['Stirlingshire', 'East Lothian', 'Mid Lothian', 'West Lothian', 'East Lothian', 'Lancashire', 'Leicestershire', 'Falkirk'];
+
+
+        $(document).ready(function() {
+
+            $('#accordion').accordion({
+                header: 'h3'
+            });
+
+
+            $('#tabs').tabs();
+
+            $('#startdate').datepicker({
+                dateFormat: 'dd-mm-yy'
+            });
+
+            $('#county').autocomplete({
+                source: counties
+            })
+
+
+        });
+
+    </script>
+
+
+</body>
+
+</html>

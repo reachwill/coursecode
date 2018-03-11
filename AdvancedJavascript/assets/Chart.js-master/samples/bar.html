@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Bar Chart</title>
+		<script src="../Chart.js"></script>
+		<meta name = "viewport" content = "initial-scale = 1, user-scalable = no">
+		<style>
+			canvas{
+			}
+		</style>
+	</head>
+	<body>
+    <button type="button" id="testBtn">Tester</button>
+		<canvas id="canvas" height="450" width="600"></canvas>
+
+
+<script>
+var myLine;
+document.getElementById('testBtn').addEventListener('click',function(){
+	var canvas  = document.getElementById('canvas');
+	canvas.width = canvas.width;
+	myLine = new Chart(document.getElementById("canvas").getContext("2d")).Bar(barChartData);
+	
+});
+		
+		
+		
+		var json = {"datasets":[{"points":[100,59,90,81,56,55,40],"fill":"rgba(220,220,220,0.5)","stroke":"rgba(220,220,220,1)"},{"points":[28,48,40,19,96,27,100],"fill":"rgba(151,187,205,0.5)","stroke":"rgba(151,187,205,1)"}]}
+		
+		
+		var numDatasets = json.datasets.length;
+		var fetchedDatasets = []
+		for(var i=0;i<numDatasets;i++){
+			fetchedDatasets.push({fillColor:json.datasets[i].fill,strokeColor:json.datasets[i].stroke,data:json.datasets[i].points})
+		}
+		
+		var barChartData = {
+			labels : ["January","February","March","April","May","June","July"],
+			datasets : fetchedDatasets
+		}
+		
+		
+		
+		
+		
+	
+	
+</script>
+</body>
+</html>

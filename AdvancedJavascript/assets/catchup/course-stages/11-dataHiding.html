@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Untitled Document</title>
+</head>
+
+<body>
+    <script>
+        function Person() {
+            //properties/fields
+            var name = "Will";
+            var height = 85;
+            var weight = 90;
+
+        }
+        Person.prototype = {
+            setHeight: function (newHeight) {
+                height = newHeight;
+            },
+            getHeight: function () {
+                return height;
+            },
+            setWeight: function (newWeight) {
+                weight = newWeight;
+            },
+            getWeight: function () {
+                return weight;
+            },
+            setName: function (newName) {
+                name = newName;
+            },
+            getName: function () {
+                return name;
+            }
+        };
+
+        var aPerson = new Person();
+
+        //============================!!!!!!!!!!!!!!
+        //ONLY WORKS IF YOU SET WEIGHT FIRST
+        //answer in slide
+
+
+        aPerson.setWeight(2000);
+        alert(aPerson.getWeight())
+        var myName = aPerson.getName();
+        aPerson.setName("mud");
+        var myName = aPerson.getName();
+    </script>
+</body>
+
+</html>

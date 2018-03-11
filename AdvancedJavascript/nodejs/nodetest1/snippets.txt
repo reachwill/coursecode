@@ -1,0 +1,6 @@
+
+
+
+export PATH=$PATH:/Applications/mongodb
+
+mongod --dbpath c:\node\nodetest2\data

@@ -1,0 +1,12 @@
+{
+    "cars":[
+        {"id":"00001","fileName":"image1.jpeg","caption":"Front view","cost":"95000"},
+        {"id":"00002","fileName":"image2.jpeg","caption":"Rear view","cost":"95000"},
+        {"id":"00003","fileName":"image3.jpeg","caption":"Fast car","cost":"295000"},
+        {"id":"00004","fileName":"image4.jpeg","caption":"Very fast car","cost":"395000"},
+        {"id":"00005","fileName":"image5.jpeg","caption":"The fastest of all cars","cost":"995000"}
+    ]
+}
+
+
+

@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Object Creation Patterns 1</title>
+</head>
+
+<body>
+
+    <button id="testBtn">Tester</button>
+
+    <script>
+        //========= 1
+        var shape = {
+            color: 'red',
+            borderThickness: '2.0'
+        }
+
+        /*var shape = {
+            color: 'red',
+            borderThickness: '2.0',
+            describe: function () {
+                console.log("I am a " + this.color + " shape, with a border that is " +
+                    this.borderThickness + " thick");
+            }
+        }*/
+
+
+
+        //======== 2
+        /*function Shape(color, borderThickness) {
+            this.color = color;
+            this.borderThickness = borderThickness;
+        }
+
+        var shape2 = new Shape('red', 2.0);
+
+        Shape.prototype.describe = function () {
+            console.log("I am a " + this.color + " shape, with a border that is " +
+                this.borderThickness + " thick");
+        };
+
+
+        Shape.prototype.addWhenNeeded = function () {
+            alert('Add me when needed')
+        };*/
+
+        //============ 3
+
+        /*function Shape(color, borderThickness) {
+            this.color = color;
+            this.borderThickness = borderThickness;
+            return this; //new line
+        }
+
+        var shape2 = new Shape('red', 2.0);
+
+        Shape.prototype.describe = function () {
+            console.log("I am a " + this.color + " shape, with a border that is " +
+                this.borderThickness + " thick");
+        };
+
+        Shape.prototype.addWhenNeeded = function () {
+            alert('Add me when needed')
+        };*/
+
+        //=============== 4
+        /* function Shape(color, borderThickness) {
+             if (!(this instanceof Shape)) {
+                 return new Shape(color, borderThickness);
+             }
+             this.color = color;
+             this.borderThickness = borderThickness;
+         }
+
+         var shape2 = new Shape('red', 2.0);
+
+         Shape.prototype.describe = function () {
+             console.log("I am a " + this.color + " shape, with a border that is " +
+                 this.borderThickness + " thick");
+         };
+
+         Shape.prototype.addWhenNeeded = function () {
+             alert('Add me when needed')
+         };*/
+
+        //=============== 5
+        function Shape(color, borderThickness) {
+            if (!(this instanceof Shape)) {
+                return new Shape(color, borderThickness);
+            }
+            this.color = color;
+            this.borderThickness = borderThickness;
+        }
+
+        var shape2 = new Shape('red', 2.0);
+
+        Shape.prototype.describe = function () {
+            console.log("I am a " + this.color + " shape, with a border that is " +
+                this.borderThickness + " thick");
+        };
+        var testBtn = document.getElementById('testBtn');
+        //testBtn.addEventListener('click', shape2.describe);//step 1
+        testBtn.addEventListener('click', function () {
+            shape2.describe();
+        }); //step 2
+    </script>
+
+</body>
+
+</html>

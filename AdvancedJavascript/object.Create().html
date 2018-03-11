@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Untitled Document</title>
+</head>
+
+<body>
+<script>
+//Most people define a constructor function and then create an object by using the new keyword:
+/*
+function Car (desc) {
+    this.desc = desc;
+    this.color = "red";
+    this.getInfo = function getInfo() {
+        return 'A ' + this.color + ' ' + this.desc + '.';
+    };
+}
+ 
+//instantiate object using the constructor function
+var car = new Car('Porsche boxter');
+car.color = "blue";
+alert(car.getInfo()); //displays 'A blue Porsche boxter.'
+
+*/
+
+
+
+//shares the method across objects:
+/*
+function Car (desc) {
+    this.desc = desc;
+    this.color = "red";
+}
+*/
+/*Car.prototype.getInfo = function() {
+    return 'A ' + this.color + ' ' + this.desc + '.';
+};*/
+/*
+Car.prototype = {
+    getInfo: function() {
+      return 'A ' + this.color + ' ' + this.desc + '.';
+    },
+    drive: function() {
+      //DO SOMETHING
+    },
+    stop: function() {
+      //DO SOMETHING
+    }
+};
+
+ 
+
+//instantiate object using the constructor function
+var car = new Car('Porsche boxster');
+car.color = "blue";
+alert(car.getInfo()); //displays 'A blue Porsche boxter.'
+
+*/
+
+//The description is lost. So why is that? Simple; the create() method only uses the prototype and not the constructor. Hence, Object.create() is an excellent choice for creating an object without going through its constructor. 
+
+function Car (desc) {
+    this.desc = desc;
+    this.color = "red";
+}
+ 
+Car.prototype = {
+    getInfo: function() {
+      return 'A ' + this.color + ' ' + this.desc + '.';
+    }
+};
+//instantiate object using the constructor function
+var car =  Object.create(Car.prototype);
+car.color = "blue";
+alert(car.getInfo()); //displays 'A blue undefined.' ??!
+
+
+//The solution of course is to supply it via the second parameter.
+
+var Car2 = Object.create(null); //this is an empty object, like {}
+Car2.prototype = {
+  getInfo: function() {
+    return 'A ' + this.color + ' ' + this.desc + '.';
+  }
+};
+ 
+var car2 = Object.create(Car2.prototype, {
+  //value properties
+  color:   { writable: true,  configurable:true, value: 'red' },
+  //concrete desc value
+  rawDesc: { writable: false, configurable:true, value: 'Porsche boxter' },
+  // data properties (assigned using getters and setters)
+  desc: { 
+    configurable:true, 
+    get: function ()      { return this.rawDesc.toUpperCase();  },
+    set: function (value) { this.rawDesc = value.toLowerCase(); }  
+  }
+});
+ 
+car2.color = 'blue';
+car2.desc = 'Subaru';
+alert(car2.getInfo()); //displays 'A blue PORSCHE BOXTER.'
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

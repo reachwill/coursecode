@@ -1,0 +1,116 @@
+//++++++++++APP BOOTSTRAP NAVBAR+++++++++++++++++++++++++++++++++++++++++//
+
+<nav class="navbar navbar-default">
+<div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="#">{{title}}</a>
+  </div>
+
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+      <li><a routerLink="/home" [routerLinkActive]="['active']">Home<span class="sr-only">(current)</span></a></li>
+      <li><a routerLink="/contact" [routerLinkActive]="['active']">Contact</a></li>
+    </ul>
+
+  </div>
+</div>
+</nav>
+
+
+//++++++++++APP BOOTSTRAP THEME STYLING+++++++++++++++++++++++++++++++++++++++++//
+
+<link rel="stylesheet" href="https://bootswatch.com/solar/bootstrap.min.css">
+
+
+
+//++++++++++CONTACT COMPONENT FORM STYLING+++++++++++++++++++++++++++++++++++++++++//
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/css/foundation.min.css">
+
+
+
+//++++++++++CONTACT COMPONENT FORM ELEMENTS+++++++++++++++++++++++++++++++++++++++++//
+
+<div *ngIf="!name; else forminfo">
+  <form [formGroup]="rForm" (ngSubmit)="addPost(rForm.value)">
+    <div class="form-container">
+      <div class="row columns">
+        <h1>My Reactive Form</h1>
+        <label>Name
+          <input type="text" formControlName="name">
+        </label>
+
+        <label>Description
+          <textarea  formControlName="description"></textarea>
+        </label>
+
+        <label for="validate">Minimum of 3 Characters</label>
+        <input type="checkbox" name="validate" formControlName="validate" value="1"> On
+
+        <input type="submit" class="button expanded" value="Submit Form" [disabled]="!rForm.valid">
+      </div>
+    </div>
+  </form>
+</div>
+
+<ng-template #forminfo>
+  <div class="form-container">
+    <div class="row columns">
+        <h1>{{ name }}</h1>
+
+        <p>{{ description }}</p>
+    </div>
+  </div>
+</ng-template>
+
+
+
+
+
+
+//++++++++++CONTACT COMPONENT STYLING+++++++++++++++++++++++++++++++++++++++++//
+
+.form-container {
+    display:block;
+    width:90%;
+    padding:2em;
+    margin: 2em auto;
+    background:#fff;
+}
+
+.alert {
+    background: #f2edda;
+    padding: 7px;
+    font-size: .9em;
+    margin-bottom: 20px;
+    display: inline-block;
+    animation: 2s alertAnim forwards;
+}
+
+.button {
+    margin-top: 3rem;
+}
+h1 {
+    margin-bottom: 2rem;
+    font-weight:bold;
+    font-family:'Muli';
+    font-size: 2em;
+}
+
+
+@keyframes alertAnim {
+    from {
+        opacity:0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity:1;
+        transform: translateY(0);
+    }
+}

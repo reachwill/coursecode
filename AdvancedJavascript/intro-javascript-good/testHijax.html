@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Javascript Template</title>
+
+    <style>
+        body {
+            font-family: arial;
+        }
+
+    </style>
+
+
+</head>
+
+<body>
+
+    <a href="charts.html" class="loaderLink">Load Charts</a>
+
+    <div id="target" style="width:400px;height:400px"></div>
+
+
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('.loaderLink').click(function(e) {
+                e.preventDefault();
+                var url = $(this).attr('href');
+                $('#target').load(url);
+
+            });
+        });
+
+    </script>
+
+
+</body>
+
+</html>

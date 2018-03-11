@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Javascript Template</title>
+    <style>
+        #imgBanner {
+            width: 320px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <img id="imgBanner">
+
+
+    <script>
+        //declare an array of image names to act as a datasource for the banner
+        var images = ['image1.jpeg', 'image2.jpeg', 'image3.jpeg', 'image4.jpeg'];
+        //you can add items like this (a bit more dynamic)
+        images.push('image5.jpeg');
+        //generate a random number to use to select a random image
+        var randomNum = Math.floor(Math.random() * images.length);
+        //now use randomNum to select a random image
+        document.getElementById('imgBanner').src = 'images2/' + images[randomNum];
+
+    </script>
+
+
+
+</body>
+
+
+
+
+
+
+
+
+
+
+</html>

@@ -1,0 +1,207 @@
+<!doctype html>
+
+<!--DRAGGABLE PART 1
+
+Namspaced Utilities
+Drag drop to remove
+End with issue of public prop isDraggable
+------------------------>
+
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Inheritance</title>
+    <style>
+        .gridItem {
+            width: 200px;
+            height: 200px;
+            border: 1px solid black;
+            margin: 10px;
+            float: left;
+        }
+        
+        body {
+            font-family: arial;
+        }
+        
+        h2 {
+            margin: 0;
+            padding: 5px;
+            background-color: cadetblue;
+            color: azure
+        }
+        
+        select {
+            width: 95%;
+            height: 45px;
+            margin: 10px;
+            border: 1px solid #333;
+            padding: 4px;
+        }
+        
+        #dropzone {
+            width: 100px;
+            height: 100px;
+            border: 1px solid #333;
+        }
+        
+        #dropzone:before {
+            content: 'Bin';
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="dropzone" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+
+    <script>
+        var Utilties = {
+            removeElement: function (ev) {
+                ev.preventDefault();
+                var data = ev.dataTransfer.getData("id");
+                var toBin = document.getElementById(data);
+
+
+                ev.target.appendChild(document.getElementById(data));
+                ev.target.removeChild(document.getElementById(data));
+                setTimeout(function () {
+                    ev.target.innerHTML = '';
+                }, 2000);
+                ev.target.innerHTML = '<p>Item removed</p>';
+
+            }
+        }
+
+        function allowDrop(ev) {
+            ev.preventDefault();
+        }
+
+        function drag(ev) {
+            ev.dataTransfer.setData("id", ev.target.id);
+        }
+
+        function drop(ev) {
+            Utilties.removeElement(ev);
+        }
+
+
+
+
+        var WidgetNS = {
+            widgetsArray: [],
+            Widget: function (isDraggable, width, height) {
+                this.isDraggable = isDraggable || false;
+                (this.isDraggable ? this.class = 'draggable' : this.class = '');
+                this.width = width || 'auto';
+                this.height = height || 'auto';
+            },
+            WidgetType1: function (multipleSelect, selectOptions, title) {
+                this.multipleSelect = multipleSelect;
+                this.selectOptions = selectOptions;
+                this.title = title || 'Untitled';
+                WidgetNS.Widget.prototype.registerWidget.call(this, this);
+                WidgetNS.Widget.prototype.renderWidgetContainer.call(this, this);
+                //Widget.prototype.renderType1Contents();//show difference using call
+                WidgetNS.Widget.prototype.renderType1Contents.call(this, this);
+            },
+            WidgetType2: function (autoComplete, autoCompleteOptions, title) {
+                this.autoComplete = autoComplete;
+                this.autoCompleteOptions = autoCompleteOptions;
+                this.title = title || 'Untitled';
+                WidgetNS.Widget.prototype.registerWidget.call(this, this);
+                WidgetNS.Widget.prototype.renderWidgetContainer.call(this, this);
+            }
+        }
+
+        WidgetNS.Widget.prototype.registerWidget = function (widget) {
+            WidgetNS.widgetsArray.push(widget);
+        };
+
+        WidgetNS.Widget.prototype.renderWidgetContainer = function () {
+            var div = document.createElement("div");
+            div.className = 'gridItem';
+            div.setAttribute('draggable', this.isDraggable);
+            div.setAttribute('ondragstart', 'drag(event)');
+            div.id = 'gridItem' + document.querySelectorAll('.gridItem').length;
+            div.style.width = this.width + 'px';
+            div.style.height = this.height + 'px';
+            this.gridItemId = 'gridItem' + document.querySelectorAll('.gridItem').length;
+            document.body.appendChild(div);
+        };
+
+        WidgetNS.Widget.prototype.setDraggable = function (val) {
+            var div = document.getElementById(this.gridItemId);
+            div.setAttribute('draggable', val);
+            this.isDraggable = val;
+        };
+
+        WidgetNS.WidgetType1.prototype = new WidgetNS.Widget(true, 300, 300); //What we have set up here is an inheritance chain from Widget to WidgetType1
+
+
+        WidgetNS.Widget.prototype.renderType1Contents = function () {
+            var thisDiv = document.getElementById(this.gridItemId);
+
+            var title = document.createElement("h2");
+            title.innerHTML = this.title;
+            thisDiv.appendChild(title);
+
+            //Create array of options to be added
+            var array = this.selectOptions;
+
+            //Create and append select list
+            var selectList = document.createElement("select");
+            selectList.id = "mySelect";
+            thisDiv.appendChild(selectList);
+
+            //Create and append the options
+            for (var i = 0; i < array.length; i++) {
+                var option = document.createElement("option");
+                option.value = array[i].value;
+                option.text = array[i].label;
+                selectList.appendChild(option);
+            }
+        };
+
+        var w1 = new WidgetNS.WidgetType1(true, [{
+            'label': 'label1',
+            'value': 'value2'
+        }, {
+            'label': 'label2',
+            'value': 'value2'
+        }, {
+            'label': 'label3',
+            'value': 'value3'
+        }], 'Title of Widget');
+
+
+
+        var w2 = new WidgetNS.WidgetType1(true, [{
+            'label': 'label1',
+            'value': 'value2'
+        }, {
+            'label': 'label2',
+            'value': 'value2'
+        }, {
+            'label': 'label3',
+            'value': 'value3'
+        }], 'Title of Widget');
+        w2.setDraggable(false);
+
+
+
+        var w3 = new WidgetNS.WidgetType1(true, [{
+            'label': 'label1',
+            'value': 'value2'
+        }, {
+            'label': 'label2',
+            'value': 'value2'
+        }, {
+            'label': 'label3',
+            'value': 'value3'
+        }], 'Title of Widget');
+    </script>
+</body>
+
+</html>

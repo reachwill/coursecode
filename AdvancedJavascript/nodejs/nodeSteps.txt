@@ -1,0 +1,73 @@
+STEP 1 – INSTALL NODE.JS
+	http://nodejs.org/
+	
+	
+	Node was installed at
+
+   		/usr/local/bin/node
+
+	npm was installed at
+	
+	   /usr/local/bin/npm
+	
+	Make sure that /usr/local/bin is in your $PATH.
+	
+
+
+STEP 2 – INSTALL EXPRESS
+
+Framework that takes Node from a barebones application and turns it 
+into something that behaves more like the web servers.
+This installs some core Express functionality right into our Node installation, making it available globally 
+	
+	C:\node>npm install -g express
+
+
+
+STEP 3 – CREATE AN EXPRESS PROJECT
+
+We're going to use Express and Jade
+
+	express --sessions nodetest1
+	
+	
+STEP 4 – EDIT DEPENDENCIES
+
+	open package.json
+	
+	"dependencies": {
+		"express": "3.4.4",
+		"jade": "*",
+		"mongodb": "*",
+		"monk": "*"
+	}
+	
+STEP 5 – INSTALL DEPENDENCIES
+
+	cd to your nodetest1 directory
+	
+	npm install
+	
+	test at nodetest1>node app.js then localhost:3000
+	
+	
+STEP 6 - OPEN APP.JS
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

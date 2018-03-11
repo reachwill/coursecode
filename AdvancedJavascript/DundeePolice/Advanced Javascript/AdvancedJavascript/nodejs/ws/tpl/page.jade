@@ -1,0 +1,33 @@
+doctype html
+html
+    head
+        title= "Real time web chat"
+        link(rel='stylesheet' href='/stylesheets/styles.css')
+        link(rel='stylesheet' href='http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css')
+        script(src='http://code.jquery.com/jquery-1.10.1.min.js')
+        script(src='http:////code.jquery.com/ui/1.10.3/jquery-ui.js')
+        script(src='/chat.js')
+        script(src='/socket.io/socket.io.js')
+        
+    body
+        
+        #barContainer
+          #bar
+          #dataLabel realtime data
+          
+        #container
+          
+            #coords()  
+          
+            #content(style='width: 500px; height: 300px; margin: 0 0 20px 0; border: solid 1px #999; overflow-y: scroll;')
+        
+        #ui
+            .controls
+                label Name:
+                input#name(style='width:350px;',value='Will')
+                br
+                label Message:
+                input.field(style='width:350px;', id='field')
+                br
+                input.send(type='button', value='send', id='send')
+                #slider
