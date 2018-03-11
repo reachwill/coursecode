@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //not just methods but properties too
+        var Module = (function() {
+
+            var privateArray = [];
+
+            var publicMethod = function(somethingOfInterest) {
+                privateArray.push(somethingOfInterest);
+                console.log(privateArray);
+            };
+
+            return {
+                publicMethod: publicMethod
+            };
+
+        })();
+        Module.publicMethod('an item');
+    </script>
+</body>
+
+</html>

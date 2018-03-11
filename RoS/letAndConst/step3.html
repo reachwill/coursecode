@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+//        const key = 'abc123';
+//        let points = 50;
+//        let winner = false;
+//
+//        key = 'abc1234'; //error
+
+        const person = {
+            name: 'Wes',
+            age: 28
+        }
+
+        person.age = 29;
+        
+        const me = Object.freeze(person);
+        
+        person.age = 30;
+    </script>
+
+</body>
+</html>

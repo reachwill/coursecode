@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //revealing module pattern
+        var Module = (function() {
+
+            var privateMethod = function() {
+                // private
+                console.log('private revealed')
+            };
+
+            var someMethod = function() {
+                // public
+                privateMethod();
+            };
+
+            var anotherMethod = function() {
+                // public
+            };
+
+            return {
+                someMethod: someMethod,
+                anotherMethod: anotherMethod
+            };
+
+        })();
+        Module.someMethod();
+    </script>
+</body>
+
+</html>

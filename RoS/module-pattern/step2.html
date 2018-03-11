@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //Object Literals
+        var myObjLiteral = {
+            defaults: {
+                name: 'Todd'
+            }
+            , someMethod: function () {
+                console.log(this.defaults);
+            }
+        };
+        // console.log: Object { name: 'Todd' }
+        myObjLiteral.someMethod();
+        
+//        But the issue with Object Literals is the pattern can be abused. Methods intended to be “private” will be accessible by users because they are part of the Object. This is where the Module comes in to save us, by allowing us to define all our “private” stuff locally and only return “the good parts”.
+        
+        
+    </script>
+</body>
+
+</html>

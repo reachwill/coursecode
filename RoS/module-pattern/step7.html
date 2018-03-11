@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //not just methods but properties too
+        var Module = (function() {
+
+            var _privateArray = [];
+
+            var publicMethod = function(somethingOfInterest) {
+                _privateArray.push(somethingOfInterest);
+                console.log(_privateArray);
+            };
+
+            return {
+                publicMethod: publicMethod
+            };
+
+        })();
+        Module.publicMethod('an item');
+
+
+        var ModuleTwo = (function(Module) {
+
+            Module.extension = function() {
+                // another method!
+            };
+
+            return Module;
+
+        })(Module || {});
+
+        //        Another hint here, you’ll notice I’ve passed in Module || {} into my second ModuleTwo, this is incase Module is undefined - we don’t want to cause errors now do we ;). What this does is instantiate a new Object, and bind our extension method to it, and return it.
+    </script>
+</body>
+
+</html>

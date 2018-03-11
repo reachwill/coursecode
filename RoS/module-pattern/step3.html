@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var Module = (function() {
+
+            //var makes its private (a closure)
+            var privateMethod = function() {
+                console.log('I am the private method');
+            };
+
+            return {
+                publicMethodOne: function() {
+                    // I can call `privateMethod()` you know...
+                    privateMethod();
+                },
+                publicMethodTwo: function() {
+
+                },
+                publicMethodThree: function() {
+
+                }
+            };
+
+        })();
+        
+        Module.publicMethodOne();
+    </script>
+</body>
+
+</html>
