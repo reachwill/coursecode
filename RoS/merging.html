@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+
+<body>
+
+    <script src="node_modules/deepmerge/dist/umd.js"></script>
+  <script>
+
+    //MERGING ***********************************
+
+    //ES5 ----------
+    /*
+    var obj1 = {
+        a: 1,
+        b: 2
+    }
+    var obj2 = {
+        a: 2,
+        c: 3,
+        d: 4
+    }
+    var obj3 = Object.assign(obj1, obj2)
+
+    console.log(obj3);
+    */
+
+
+    //ES6 ----------
+    const obj1 = {
+      a: 1,
+      b: 2
+    }
+    const obj2 = {
+      a: 2,
+      c: 3,
+      d: 4
+    }
+    const obj3 = { ...obj1,
+      ...obj2
+    }
+
+    console.log(obj3);
+
+    const person = {
+      name: 'Will Gregory',
+      gender: 'Male'
+    };
+    const tools = {
+      computer: 'Mac',
+      editor: 'Atom'
+    };
+
+    const summary = { ...person,
+      ...tools
+    };
+    console.log(summary)
+    //Note:  This syntax is not yet support by all browsers but you can use Babel with the transform-object-rest-spread plugin to enable object merging with the spread operator.
+
+    //DEEP MERGE**********************************
+
+//npm init
+//npm i deepmerge --save
+//<script src="node_modules/deepmerge/dist/umd.js"><\/script>
+
+
+    const defaultPerson = {
+      name: 'Marian',
+      gender: 'Female',
+      hair: {
+        color: 'brown',
+        cut: 'long'
+      },
+      eyes: 'brown',
+      family: ['mom', 'dad']
+    };
+
+    const me = {
+      name: 'Will Gregory',
+      gender: 'Male',
+      hair: {
+        cut: 'short'
+      },
+      family: ['wife', 'kids', 'dog']
+    };
+
+    const summary2 = { ...defaultPerson,
+      ...me
+    };
+
+    //const deepmerge = require('deepmerge');
+
+    // ...
+
+    const summary3 = deepmerge(defaultPerson, me);
+    console.log(summary3);
+
+
+  </script>
+
+</body>
+
+</html>

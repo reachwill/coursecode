@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+
+<body>
+
+
+  <script>
+    //ES5 -----------------------
+    // var obj1 = {
+    //   a: 1,
+    //   b: 2,
+    //   c: 3,
+    //   d: 4
+    // }
+    // var a = obj1.a
+    // var b = obj1.b
+    // var c = obj1.c
+    // var d = obj1.d
+
+    //ES6------------------------
+    const obj1 = {
+      a: 1,
+      b: 2,
+      c: 3,
+      d: 4
+    }
+    const {
+      a,
+      b,
+      c,
+      d
+    } = obj1
+
+    // Setup our object
+    const avengers0 = {
+      ironMan: 'Tony Stark',
+      cap: 'Steve Rogers',
+      blackWidow: 'Natasha Romanoff'
+    };
+
+    // Destructure object to individual variables
+    const {
+      ironMan: x,
+      cap: y,
+      blackWidow: z
+    } = avengers0;
+
+    // a = 'Tony Stark '
+    // b = 'Steve Rogers'
+    // c ='Natasha Romanoff'
+
+    // Output a:
+    x;
+
+    //NESTED OBJECTS------------------------
+    // Setup our object
+    const avengers5 = {
+      blackWidow: 'Natasha Romanoff',
+      ironManCharacters: {
+        couple: {
+          ironMan: 'Tony Stark',
+          hera: 'Pepper Potts',
+        },
+        partner: {
+          warMachine: 'James Brodie'
+        }
+      },
+      capCharacters: {
+        cap: 'Steve Rogers',
+        partner: {
+          falcon: 'Sam Wilson'
+        }
+      }
+    };
+
+    // Destructure object to individual variables
+    const {
+      blackWidow: ab,
+      ironManCharacters: {
+        couple: {
+          ironMan: bb,
+          hera: cb
+        },
+        partner: {
+          warMachine: db
+        }
+      },
+      capCharacters: {
+        cap: eb,
+        partner: {
+          falcon: fb
+        }
+      }
+    } = avengers5;
+
+    // ab = 'Natasha Romanoff'
+    // bb = 'Tony Stark '
+    // cb = 'Pepper Potts'
+    // db = 'James Brodie'
+    // eb = 'Steve Rogers'
+    // fb = 'Sam Wilson'
+
+    // Output ab:
+    ab;
+
+
+
+
+
+
+
+
+
+    //DESTRUCTURING ARRAYS===========================================
+    // Setup our array
+    const avengers = ['Tony Stark', 'Steve Rogers', 'Natasha Romanoff'];
+
+    // Destructure array into individual variables. The array pattern
+    // is on the left of the assignment (i.e. the '=') and the array being
+    // destructured on the right.
+    const [ironMan, cap, blackWidow] = avengers;
+    //const [ironMan, , blackWidow] = avengers;
+    //const [, cap, blackWidow] = avengers;
+
+    // ironMan = 'Tony Stark'
+    // cap = 'Steve Rogers'
+    // blackWidow = 'Natasha Romanoff'
+
+    // Output ironMan:
+    //ironMan;
+
+    //-----------------------------------------------------------------
+
+    // Destructuring Nested Arrays
+    const avengers2 = [
+      'Natasha Romanoff', ['Tony Stark', 'James Rhodes'],
+      ['Steve Rogers', 'Sam Wilson']
+    ];
+
+    // Avengers and their partners
+    const [blackWidow2, [ironMan2, warMachine],
+      [cap2, falcon]
+    ] = avengers2;
+
+    // blackWidow = 'Natasha Romanoff'
+    // ironMan = 'Tony Stark'
+    // warMachine = 'James Rhodes'
+    // cap = 'Steve Rogers'
+    // falcon = 'Sam Wilson'
+
+    // Output warMachine:
+    warMachine;
+
+    //-----------------------------------------------------------------
+
+    // Plucking Pepper Potts from a deeply nested Array
+    const avengers3 = [
+      'Natasha Romanoff', [
+        ['Tony Stark', 'Pepper Potts'], 'James Rhodes'
+      ],
+      ['Steve Rogers', 'Sam Wilson']
+    ];
+
+    // Destructure
+    const [, // Skip over 'Natasha Romanoff'
+      [
+        [, // Skip over 'Tony Stark'
+          hera // Pepper Potts, assigned to a variable called 'hera'
+        ]
+      ]
+    ] = avengers3;
+
+    // Note: you can also write this like so:
+    // const [, [[, hera ]]] = avengers;
+
+    // Output hera:
+    hera;
+
+    // hera = 'Pepper Potts'
+
+    //-----------------------------------------------------------------
+
+    // Destructuring with the ...rest operator
+    const avengers4 = ['Natasha Romanoff', 'Tony Stark', 'Steve Rogers'];
+
+    const [blackWidow4, ...theOthers] = avengers;
+
+    theOthers;
+    // blackWidow = 'Natasha Romanoff'
+    // theOthers = ['Tony Stark', 'Steve Rogers']
+
+    // Output theOthers:
+    theOthers;
+  </script>
+
+</body>
+
+</html>
