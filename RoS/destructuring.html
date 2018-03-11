@@ -23,6 +23,9 @@
     // var d = obj1.d
 
     //ES6------------------------
+      
+//      Destructuring allows us to alias members within a complex object for easier reference
+      
     const obj1 = {
       a: 1,
       b: 2,
@@ -35,6 +38,8 @@
       c,
       d
     } = obj1
+    
+    //console.log()
 
     // Setup our object
     const avengers0 = {
@@ -50,12 +55,12 @@
       blackWidow: z
     } = avengers0;
 
-    // a = 'Tony Stark '
-    // b = 'Steve Rogers'
-    // c ='Natasha Romanoff'
+    // x = 'Tony Stark '
+    // y = 'Steve Rogers'
+    // z ='Natasha Romanoff'
 
     // Output a:
-    x;
+    //x;
 
     //NESTED OBJECTS------------------------
     // Setup our object
@@ -188,7 +193,7 @@
     // Destructuring with the ...rest operator
     const avengers4 = ['Natasha Romanoff', 'Tony Stark', 'Steve Rogers'];
 
-    const [blackWidow4, ...theOthers] = avengers;
+    const [blackWidow4, ...theOthers] = avengers4;
 
     theOthers;
     // blackWidow = 'Natasha Romanoff'
