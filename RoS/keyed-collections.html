@@ -27,6 +27,19 @@
 
         sayings.clear();
         sayings.size; // 0
+        
+        
+        var sayings2 = new Map();
+        sayings2.set('dog', {loud:true,bark:true});
+        
+        
+        //sayings.delete('dog');
+        sayings2.has('dog'); // false
+
+        for (var [key, value] of sayings2) {
+            console.log(key + ' goes ' + value.loud);
+        }
+        
 
         /*
         
