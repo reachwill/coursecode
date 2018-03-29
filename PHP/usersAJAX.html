@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Get Users Using AJAX</title>
+</head>
+<body>
+
+    <table border="1" id="usersTable">
+        <thead>
+            <tr>
+                <th>Last Name</th>
+                <th>First Name</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    
+    <script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+  
+  <script>
+    
+      $(document).ready(function(){
+          //go get the users
+          function getUsers(){
+              $.ajax({
+                  url:'usersJSON.php',
+                  dataType:'json',
+                  type:'get',
+                  success:function(data){
+                      console.log(data);
+                      
+                      $('#usersTable tbody').html('');
+                      
+                      for(var i = 0 ; i < data.length ; i++){
+                            var tr = '<tr>';
+                            tr += '<td>' + data[i].lastname + '</td>';
+                            tr += '<td>' + data[i].firstname + '</td>';
+                            tr += '<td>' + data[i].email + '</td>';
+                            tr += '</tr>';
+                            $('#usersTable tbody').append(tr);
+                      }  
+                      
+                  },
+                  error:function(x,m,s){console.log(m)}
+              });
+          }//end of getUsers
+          
+          getUsers();
+          setInterval(getUsers,30000);
+          
+      });
+      
+      
+      
+      
+      
+    
+</script>
+
+
+
+</body>
+</html>
