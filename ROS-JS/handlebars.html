@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Handlebars Demo</title>
+</head>
+<body>
+  
+  
+      
+      <table id="carsTable" border="1">
+         <thead>
+             <tr>
+                 <th>Make</th>
+                 <th>Model</th>
+                 <th>Description</th>
+                 <th>Cost</th>
+             </tr>
+         </thead>
+         <tbody></tbody>   
+      </table>
+  
+  
+   
+   
+   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+   
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+   
+   
+   <script>
+    
+       var communicator = {
+           
+           getData: function(url,callback){
+               $.ajax({
+                   url: url,
+                   type: 'get',
+                   dataType: 'json',
+                   success:function(data){
+                       callback(data)
+                   },
+                   error: function(x,m,s){}
+               });//end of ajax()
+           }
+                   
+       };//end of communicator
+       
+       var view = {};//end of view
+       
+       view.renderCarsTable = function(data){
+           console.log(data);
+           var source = document.getElementById('carsTable-template').innerHTML;
+           var template = Handlebars.compile(source);
+            var htmlStr = template(data);
+           $('#carsTable tbody').html(htmlStr);
+       }
+       
+       //invoke the getting of car data
+       communicator.getData('cars.json',view.renderCarsTable);
+       
+       
+       //create a cart object -- Cart Class here here?
+       var cart = {
+           items:[]
+       };//end of cart
+       
+       
+       //listen for the user clicking addLinks - we need to use the on() method to apply event listeners to elements creating at runtime
+       $('#carsTable tbody').on('click','.addLink',function(){
+           //process the adding to cart
+           var idToAdd = $(this).data('id');
+           cart.items.push({productId:idToAdd});
+           localStorage.setItem('cartItems',JSON.stringify(cart));
+       });
+       
+         
+    </script>
+    
+    
+    <script id="carsTable-template" type="text/x-handlebars-template">
+        {{#each cars}}
+            <tr>
+                <td>{{make}}</td>
+                <td>{{model}}</td>
+                <td>{{caption}}</td>
+                <td>{{cost}}</td>
+                <td><a class="addLink" href="#" data-id="{{productId}}">Add to Cart</a></td>
+            </tr>
+        {{/each}}
+    </script>
+   
+   
+   
+   
+    
+</body>
+</html>

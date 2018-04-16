@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    
+</head>
+<body>
+   
+   <input type="text" id="userTxt" placeholder="Your name">
+   <button type="button" id="clickBtn">Login</button>
+   
+   <div id="message"></div>
+   
+   
+   
+   <script>
+       
+       //listen for the user clicking the clickBtn
+       document.getElementById('clickBtn').addEventListener('click',displayMessage);
+       //listen for the user pressing the enter key
+       document.addEventListener('keyup',function(event){
+           //check which key was pressed
+           console.log(event);
+           if(event.keyCode == 13){
+               displayMessage();
+           }
+       });//end of keyup
+       
+       //global variable
+       var userName = 'will';
+       
+       function displayMessage(){
+           //local variable
+           var userName = document.getElementById('userTxt').value;
+           document.getElementById('message').innerHTML = '<h1>Hello ' + userName + '</h1>';
+       }//end of displayMessage
+       
+    </script>
+   
+   
+    
+</body>
+</html>

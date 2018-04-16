@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <form action="#">
+
+        <div>
+            <label for="name">Your Name:</label>
+            <input type="text" name="name" required>
+        </div>
+        <div>
+            <label for="email">Your Email:</label>
+            <input type="email" name="email" required>
+        </div>
+        <div>
+            <label for="date">date of Purchase:</label>
+            <input type="date" name="date" required>
+        </div>
+
+
+        <button type="submit">Send</button>
+
+    </form>
+
+
+
+
+
+    <div id="clock"></div>
+
+    <script>
+        var digitalClock = {
+            updateTime: function() {
+                var now = new Date();
+                //console.log(this);
+                var hours = digitalClock.formatNumber(now.getHours());
+                var minutes = digitalClock.formatNumber(now.getMinutes());
+                var seconds = digitalClock.formatNumber(now.getSeconds());
+
+                document.getElementById('clock').innerHTML = hours + ':' + minutes + ':' + seconds;
+            },
+            formatNumber: function(num){
+                if(num < 10){
+                    num = '0' + num;
+                }
+                return num;
+            }
+        }; //end of digitalClock
+
+        digitalClock.updateTime();
+
+        var int = setInterval(digitalClock.updateTime, 1000);
+        
+        
+        
+        
+        
+    </script>
+
+
+
+
+</body>
+</html>

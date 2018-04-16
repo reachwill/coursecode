@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+   
+   <script>
+       
+    //MAP ****************************
+       var noises = new Map();
+       noises.set('dog','bark');
+       noises.set('cat','meow');         
+       console.log(noises.size);
+       
+       //noises.delete('cat');
+       console.log(noises.has('elephant'));
+       
+       //loop thru a Map
+       for(var [key,value] of noises){
+           console.log(key + ' goes ' + value);
+       }
+    
+       
+       //SET *************************************
+    var aSet = new Set();
+       aSet.add(1);
+       aSet.add('some text');
+       
+       aSet.has(1);
+       aSet.delete('some text');
+       aSet.size;
+       
+       for(let item of aSet){
+           console.log(item);
+       }
+       
+       
+    
+    
+    </script>
+    
+</body>
+</html>

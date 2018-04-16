@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+   
+   <script>
+    
+    //ANOTHER OLD WAY
+       function oldWay(year){
+           
+           var year = year;
+           this.getYear = function(){
+               console.log(year);
+           }
+           
+       }
+       
+       var test = new oldWay(2018);
+       
+       //NEW WAY
+       class SimpleDate{
+           
+           constructor(year,month,date){
+               this._year = year;
+               this._month = month;
+               this._date = date;
+           }
+           
+           addDays(value){
+               this._date += value;
+           }
+           
+           getDate(){
+               return this._date;
+           }
+           
+           get year(){
+               return this._year;
+           }
+           
+           set year(value){
+               //validate here
+               this._year = value;
+           }
+           
+       }
+       
+       var sd = new SimpleDate(2018,03,12);
+       console.log(sd.getDate());
+       sd.year = 2019;
+       console.log(sd.year);
+
+    </script>
+    
+</body>
+</html>

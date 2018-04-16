@@ -1,0 +1,40 @@
+{
+    "cars":[
+           {
+               "fileName": "image1.jpeg",
+               "caption": "A nice car",
+               "cost": "85.000",
+               "make": "Maserati",
+               "model": "Gran Turismo",
+               "productId": "0001"
+           },{
+               "fileName": "image2.jpeg",
+               "caption": "A very nice car",
+               "cost": "95.000",
+               "make": "Maserati",
+               "model": "Gran Turismo",
+               "productId": "0002"
+           },{
+               "fileName": "image3.jpeg",
+               "caption": "A really nice car",
+               "cost": "105.000",
+               "make": "Maserati",
+               "model": "3200GT",
+               "productId": "0003"
+           },{
+               "fileName": "image4.jpeg",
+               "caption": "A fast car",
+               "cost": "185.000",
+               "make": "Maserati",
+               "model": "Le Mans",
+               "productId": "0004"
+           },{
+               "fileName": "image5.jpeg",
+               "caption": "A really fast car",
+               "cost": "285.000",
+               "make": "Maserati",
+               "model": "Quattroporte",
+               "productId": "0005"
+           }
+       ]
+}

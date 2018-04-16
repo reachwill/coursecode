@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <script>
+        var Module = (function() {
+            
+            var privateArray = [];
+
+            var privateMethod = function() {
+                console.log('Private method called from within the module');
+            }
+
+            var publicMethod1 = function(num) {
+                console.log(num);
+                privateMethod();
+            }
+
+            var publicMethod2 = function(item) {
+                console.log('Public method 2 called');
+                privateArray.push(item)
+            }
+
+            return {
+                publicMethod1: publicMethod1,
+                publicMethod2: publicMethod2
+            }
+        })();
+
+        Module.publicMethod2('an new item');
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+   
+   <script>
+    
+       //a callback example
+       function isGreater(a,b,callback){
+           var greater = false;
+           if(a > b){
+               greater = true;
+           }
+           callback(greater);
+       }
+       
+       
+       isGreater(1,2,(result)=>{
+           if(result){
+               console.log('greater');
+           }else{
+               console.log('smaller');
+           }
+       });
+       
+       //a promise example
+       
+       const isGreater2 = (a,b) => {
+           return new Promise((happy,sad)=>{
+               if(a > b){
+                   happy({data:'test'});
+               }else{
+                   sad(false);
+               }
+           });
+       }
+       
+       isGreater2(2,1)
+           .then((data)=>console.log(data))
+           .catch((result)=>console.log('smaller'))
+       
+       
+    
+    
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gallery</title>
+
+    <link rel="stylesheet" href="js/colorbox-master/example1/colorbox.css">
+
+    <style>
+        a[href$=pdf] {
+            padding-right: 20px;
+            background: url(pdf.png) no-repeat right;
+        }
+    </style>
+
+</head>
+
+<body>
+
+
+    <div id="gallery"></div>
+
+    <div id="notifyTarget"></div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+    <script src="js/colorbox-master/jquery.colorbox-min.js"></script>
+
+    <script src="js/notify.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            //go get the data
+            communicator.getData('cars.json');
+
+        }); //end of document.ready
+
+        var communicator = {
+
+            getData: function(url) {
+                $.ajax({
+                    url: url,
+                    type: 'get',
+                    dataType: 'json',
+                    success: function(data) {
+                        view.renderGallery(data);
+                    },
+                    error: function(xmlHttpRequest, message, status) {
+                        console.log(message);
+                    }
+                }); //end of ajax request
+            } //end of getData()
+
+        }; //end of communicator
+
+
+        var view = {
+            renderGallery: function(data) {
+                //loop thru the data to display each image in the page
+
+                var numItems = data.cars.length;
+                for (var i = 0; i < numItems; i++) {
+                    var htmlStr = '<a rel="maserati" href="images2/' + data.cars[i].fileName + '">';
+                    htmlStr += '<img width="150" src="images2/' + data.cars[i].fileName + '" />';
+                    htmlStr += '</a>';
+
+                    $('#gallery').append(htmlStr);
+
+                } //end of for loop
+
+                //invoke the colorbox gallery
+                $('a[rel=maserati]').colorbox({
+                    width: '50%'
+                });
+                //notify the user what to do
+                $('#notifyTarget').notify('Click a thumbnail', {
+                    globalPosition: 'bottom',
+                    className: 'success',
+                    arrowSize: 5
+                });
+
+
+
+            } //end od renderGallery()
+        }; //end of view
+    </script>
+
+
+
+
+</body>
+</html>

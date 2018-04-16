@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+   
+   <div id="display"></div>
+   
+   <script>
+    
+       var article = {
+           title: 'Template Literal Demo',
+           teaser: 'String interpolation is awesome.',
+           body: 'Display our content here.',
+           tags: ['ES6', 'template-literals', 'javascript']
+       }
+       
+       
+       function displayArticle(){
+           console.log('here')
+           var {
+               title,
+               teaser,
+               body,
+               tags
+           } = article
+           
+           var html = `
+
+                <article>
+                    <header>
+                        <h1>${title}</h1>
+                    </header>
+                    <section>
+                        <div>${teaser}</div>
+                        <div>${body}</div>
+                    </section>
+                    <footer>
+                        <ul>
+                            ${tags.map(tag => `<li>${tag}</li>`).join('')}
+                        </ul>
+                    </footer>
+                </article>
+                
+            `;//end of ticks
+           
+           console.log(html);
+           document.getElementById('display').innerHTML = html;
+           
+           
+       }
+       
+       
+    displayArticle();
+       
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+   
+   <div id="counter"></div>
+   <button id="startBtn">Start Background Process</button>
+   
+   <script>
+       
+       
+       var worker = new Worker('work.js');
+       
+    
+       var i = 0;
+       setInterval(function(){
+           i++;
+           document.getElementById('counter').innerHTML = i;
+       },500);
+       
+document.getElementById('startBtn').addEventListener('click',function(){
+    
+//    for(var i=0 ; i < 10000 ; i++){
+//        console.log(i);
+//    }
+    worker.postMessage({});
+    
+    
+});
+       
+       
+    
+    
+    </script>
+   
+   
+   
+    
+</body>
+</html>

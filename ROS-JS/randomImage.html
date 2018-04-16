@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Random Image</title>
+    
+    <style>
+    
+        body{font-family: arial;}
+        
+        figcaption{
+            background: black;
+            color:white;
+            text-align: center;
+        }
+        
+        figure{
+            width:50%;
+            margin:auto;
+            border:1px solid black;
+        }
+        
+        
+        
+        figure img{
+            width:100%;
+        }
+    
+    
+    
+    </style>
+    
+    
+    
+    
+</head>
+<body>
+   
+   <figure>
+       <img id="carImg">
+       <figcaption id="carCaption"></figcaption>
+   </figure>
+   
+   <script>
+       
+       
+       
+       
+       
+    
+       //define a data source
+       var cars = [
+           {
+               fileName: 'image1.jpeg',
+               caption: 'A nice car',
+               cost: 85.000
+           },{
+               fileName: 'image2.jpeg',
+               caption: 'A very nice car',
+               cost: 95.000
+           },{
+               fileName: 'image3.jpeg',
+               caption: 'A really nice car',
+               cost: 105.000
+           },{
+               fileName: 'image4.jpeg',
+               caption: 'A fast car',
+               cost: 185.000
+           },{
+               fileName: 'image5.jpeg',
+               caption: 'A really fast car',
+               cost: 285.000
+           }
+       ];//end of cars array
+       //generate a random num
+       var randomNum = Math.floor(Math.random() * cars.length);
+       console.log(cars[randomNum]);
+       document.getElementById('carImg').src = 'images2/'+cars[randomNum].fileName;
+       document.getElementById('carCaption').innerHTML = cars[randomNum].caption;
+    
+    </script>
+    
+</body>
+</html>
