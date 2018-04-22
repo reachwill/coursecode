@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css">
+
+
+    <style>
+        .test-form {
+            display: none;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div id="mocha"></div>
+
+    <form class="test-form">
+        <input name="first-name" type="text" data-validation="alphabetical" />
+        <input name="age" type="text" data-validation="numeric" />
+    </form>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/3.2.0/mocha.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/3.5.0/chai.min.js"></script>
+    <script>
+        (function() {
+            'use strict';
+
+            //NEXT STEP EXPLAINATION
+            /*
+                
+            Fortunately, as we’ve written the functional tests for our validator function, we can make our code better with the confidence that we won’t break it.
+                
+            Let’s use TDD to write separate functions for:
+
+            Mapping our inputs to validation queries
+            Reading our validation rules from an appropriate data structure...
+                
+                
+            */
+
+            //NEW 1---------------------------
+            //function createValidationQueries() {}
+            //EO NEW 1---------------------------
+
+
+            //NEW 3------------------------------
+            function createValidationQueries(inputs) {
+                return Array.from(inputs).map(input => ({
+                    name: input.name,
+                    type: input.dataset.validation,
+                    value: input.value
+                }));
+            }
+            //EO NEW 3------------------------------
+
+
+
+            // Implementation
+            function validateForm(form) {
+                const result = {
+                    errors: []
+                };
+                
+                //const inputs = Array.from(form.querySelectorAll('input'));//NEW 4 REMOVE THIS LINE!!!!!
+                let isValid = true;
+                
+                //NEW 4----------------------------------
+                for (let validation of createValidationQueries(form.querySelectorAll('input'))) {
+                    if (validation.type === 'alphabetical') {
+                        isValid = isValid && /^[a-z]+$/i.test(validation.value);
+
+                        if (!isValid) {
+                            result.errors.push(
+                                new Error(`${validation.value} is not a valid ${validation.name} value`)
+                            );
+                        }
+                    } else if (validation.type === 'numeric') {
+                        isValid = isValid && /^[0-9]+$/.test(validation.value);
+
+                        if (!isValid) {
+                            result.errors.push(
+                                new Error(`${validation.value} is not a valid ${validation.name} value`)
+                            );
+                        }
+                    }
+                }
+                //EO NEW 4----------------------------------
+
+                result.isValid = isValid;
+                return result;
+            }
+
+            // Test Setup
+            mocha.setup('bdd');
+            const {
+                expect
+            } = chai;
+
+            describe('the form validator', function() {
+                let form;
+
+                beforeEach(function() {
+                    //Between each test, we create a new clone of the form to remove the risk of potential side effects. The true parameter passed to cloneNode ensures that the form’s child nodes are also cloned:
+                    form = document.querySelector('.test-form').cloneNode(true);
+                });
+
+
+                describe('the validateForm function', function() {
+                    // Write your first test case here :)
+                    it('should validate a form with all of the possible validation types', function() {
+                        const name = form.querySelector('input[name="first-name"]');
+                        const age = form.querySelector('input[name="age"]');
+
+                        name.value = 'Bob';
+                        age.value = '42';
+
+                        const result = validateForm(form);
+                        expect(result.isValid).to.be.true;
+                        expect(result.errors.length).to.equal(0);
+                    });
+
+
+
+                    it('should return an error when a name is invalid', function() {
+                        const name = form.querySelector('input[name="first-name"]');
+                        const age = form.querySelector('input[name="age"]');
+
+                        name.value = '!!!';
+                        age.value = '42';
+
+                        const result = validateForm(form);
+
+                        expect(result.isValid).to.be.false;
+                        expect(result.errors[0]).to.be.instanceof(Error);
+                        expect(result.errors[0].message).to.equal('!!! is not a valid first-name value');
+                    });
+
+                    it('should return an error when an age is invalid', function() {
+                        const name = form.querySelector('input[name="first-name"]');
+                        const age = form.querySelector('input[name="age"]');
+
+                        name.value = 'Greg';
+                        age.value = 'a';
+
+                        const result = validateForm(form);
+
+                        expect(result.isValid).to.be.false;
+                        expect(result.errors[0]).to.be.instanceof(Error);
+                        expect(result.errors[0].message).to.equal('a is not a valid age value');
+                    });
+
+
+
+
+                    it('should return multiple errors if more than one field is invalid', function() {
+                        const name = form.querySelector('input[name="first-name"]');
+                        const age = form.querySelector('input[name="age"]');
+
+                        name.value = '!!!';
+                        age.value = 'a';
+
+                        const result = validateForm(form);
+
+                        expect(result.isValid).to.be.false;
+                        expect(result.errors[0]).to.be.instanceof(Error);
+                        expect(result.errors[0].message).to.equal('!!! is not a valid first-name value');
+                        expect(result.errors[1]).to.be.instanceof(Error);
+                        expect(result.errors[1].message).to.equal('a is not a valid age value');
+                    });
+
+
+
+                }); //EO validateForm suite (describe)
+
+
+                //NEW 2--------------------------------
+                describe('the createValidationQueries function', function() {
+                    it(
+                        'should map input elements with a data-validation attribute to an array of validation objects',
+
+                        function() {
+                            const name = form.querySelector('input[name="first-name"]');
+                            const age = form.querySelector('input[name="age"]');
+
+                            name.value = 'Bob';
+                            age.value = '42';
+
+                            const validations = createValidationQueries([name, age]);
+
+                            expect(validations.length).to.equal(2);
+
+                            expect(validations[0].name).to.equal('first-name');
+                            expect(validations[0].type).to.equal('alphabetical');
+                            expect(validations[0].value).to.equal('Bob');
+
+                            expect(validations[1].name).to.equal('age');
+                            expect(validations[1].type).to.equal('numeric');
+                            expect(validations[1].value).to.equal('42');
+                        }
+                    );
+                });
+                //EO NEW 2--------------------------------
+
+
+
+
+            });
+
+            mocha.run();
+        }());
+    </script>
+</body>
+</html>

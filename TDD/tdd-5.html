@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css">
+
+
+    <style>
+        .test-form {
+            display: none;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div id="mocha"></div>
+
+    <form class="test-form">
+        <input name="first-name" type="text" data-validation="alphabetical" />
+        <input name="age" type="text" data-validation="numeric" />
+    </form>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/3.2.0/mocha.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/3.5.0/chai.min.js"></script>
+    <script>
+        (function() {
+            'use strict';
+
+            //EXPANATION: To remove our hard-coded rules, let’s write a function that takes our rules as a Map and asserts the validity of our inputs.
+
+            //NEW 1-------------
+            //function validateItem(){}
+            //EO NEW 1----------------
+
+            //NEW 3 -------------------
+            function validateItem(validation, validationRules) {
+                //NEW 6-----------------------------
+                if (!validationRules.has(validation.type)) {
+                    return false;
+                }
+                //EO NEW 6-----------------------
+                return validationRules.get(validation.type).test(validation.value);
+            }
+            //EO NEW 3--------------------
+
+
+            //NEW 7-------------------------
+            /*
+            Once we see this test passing, let’s create a new Map above createValidationQueries, which will contain the actual validation rules
+            */
+            const validationRules = new Map([
+                ['alphabetical', /^[a-z]+$/i],
+                ['numeric', /^[0-9]+$/]
+            ]);
+
+
+            //EO NEW 7------------------------
+
+
+            function createValidationQueries(inputs) {
+                return Array.from(inputs).map(input => ({
+                    name: input.name,
+                    type: input.dataset.validation,
+                    value: input.value
+                }));
+            }
+
+
+
+
+            // Implementation
+            function validateForm(form) {
+                const result = {
+                    get isValid() {
+                        return this.errors.length === 0;
+                    },
+                    errors: []
+                };
+
+
+                let isValid = true;
+
+
+                for (let validation of createValidationQueries(form.querySelectorAll('input'))) {
+
+                    //REMOVE BEFORE NEW 8
+                    //                    if (validation.type === 'alphabetical') {
+                    //                        isValid = isValid && /^[a-z]+$/i.test(validation.value);
+                    //
+                    //                        if (!isValid) {
+                    //                            result.errors.push(
+                    //                                new Error(`${validation.value} is not a valid ${validation.name} value`)
+                    //                            );
+                    //                        }
+                    //                    } else if (validation.type === 'numeric') {
+                    //                        isValid = isValid && /^[0-9]+$/.test(validation.value);
+                    //
+                    //                        if (!isValid) {
+                    //                            result.errors.push(
+                    //                                new Error(`${validation.value} is not a valid ${validation.name} value`)
+                    //                            );
+                    //                        }
+                    //                    }
+
+
+                    //NEW 8 --------------------
+
+                    let isValid = validateItem(validation, validationRules);
+
+                    if (!isValid) {
+                        result.errors.push(
+                            new Error(`${validation.value} is not a valid ${validation.name} value`)
+                        );
+                    }
+
+                    //EO NEW 8--------------------
+
+
+
+                }
+
+
+                //REMOVE BEFORE NEW 8          result.isValid = isValid;
+                return result;
+            }
+
+            // Test Setup
+            mocha.setup('bdd');
+            const {
+                expect
+            } = chai;
+
+            describe('the form validator', function() {
+                let form;
+
+                beforeEach(function() {
+                    //Between each test, we create a new clone of the form to remove the risk of potential side effects. The true parameter passed to cloneNode ensures that the form’s child nodes are also cloned:
+                    form = document.querySelector('.test-form').cloneNode(true);
+                });
+
+
+                describe('the validateForm function', function() {
+                    // Write your first test case here :)
+                    it('should validate a form with all of the possible validation types', function() {
+                        const name = form.querySelector('input[name="first-name"]');
+                        const age = form.querySelector('input[name="age"]');
+
+                        name.value = 'Bob';
+                        age.value = '42';
+
+                        const result = validateForm(form);
+                        expect(result.isValid).to.be.true;
+                        expect(result.errors.length).to.equal(0);
+                    });
+
+
+
+                    it('should return an error when a name is invalid', function() {
+                        const name = form.querySelector('input[name="first-name"]');
+                        const age = form.querySelector('input[name="age"]');
+
+                        name.value = '!!!';
+                        age.value = '42';
+
+                        const result = validateForm(form);
+
+                        expect(result.isValid).to.be.false;
+                        expect(result.errors[0]).to.be.instanceof(Error);
+                        expect(result.errors[0].message).to.equal('!!! is not a valid first-name value');
+                    });
+
+                    it('should return an error when an age is invalid', function() {
+                        const name = form.querySelector('input[name="first-name"]');
+                        const age = form.querySelector('input[name="age"]');
+
+                        name.value = 'Greg';
+                        age.value = 'a';
+
+                        const result = validateForm(form);
+
+                        expect(result.isValid).to.be.false;
+                        expect(result.errors[0]).to.be.instanceof(Error);
+                        expect(result.errors[0].message).to.equal('a is not a valid age value');
+                    });
+
+
+
+
+                    it('should return multiple errors if more than one field is invalid', function() {
+                        const name = form.querySelector('input[name="first-name"]');
+                        const age = form.querySelector('input[name="age"]');
+
+                        name.value = '!!!';
+                        age.value = 'a';
+
+                        const result = validateForm(form);
+
+                        expect(result.isValid).to.be.false;
+                        expect(result.errors[0]).to.be.instanceof(Error);
+                        expect(result.errors[0].message).to.equal('!!! is not a valid first-name value');
+                        expect(result.errors[1]).to.be.instanceof(Error);
+                        expect(result.errors[1].message).to.equal('a is not a valid age value');
+                    });
+
+
+
+                }); //EO validateForm suite (describe)
+
+
+
+                describe('the createValidationQueries function', function() {
+                    it(
+                        'should map input elements with a data-validation attribute to an array of validation objects',
+
+                        function() {
+                            const name = form.querySelector('input[name="first-name"]');
+                            const age = form.querySelector('input[name="age"]');
+
+                            name.value = 'Bob';
+                            age.value = '42';
+
+                            const validations = createValidationQueries([name, age]);
+
+                            expect(validations.length).to.equal(2);
+
+                            expect(validations[0].name).to.equal('first-name');
+                            expect(validations[0].type).to.equal('alphabetical');
+                            expect(validations[0].value).to.equal('Bob');
+
+                            expect(validations[1].name).to.equal('age');
+                            expect(validations[1].type).to.equal('numeric');
+                            expect(validations[1].value).to.equal('42');
+                        }
+                    );
+                }); //EO createValidationQueries suite (describe)
+
+                //NEW 2----------------------------
+                describe('the validateItem function', function() {
+                    const validationRules = new Map([
+                        ['alphabetical', /^[a-z]+$/i]
+                    ]);
+
+                    it(
+                        'should return true when the passed item is deemed valid against the supplied validation rules',
+
+                        function() {
+                            const validation = {
+                                type: 'alphabetical',
+                                value: 'Bob'
+                            };
+
+                            const isValid = validateItem(validation, validationRules);
+                            expect(isValid).to.be.true;
+                        }
+                    );
+
+
+                    //NEW 4--------------------------
+                    it(
+                        'should return false when the passed item is deemed invalid',
+
+                        function() {
+                            const validation = {
+                                type: 'alphabetical',
+                                value: '42'
+                            };
+
+                            const isValid = validateItem(validation, validationRules);
+                            expect(isValid).to.be.false;
+                        }
+                    );
+
+
+                    //EO NEW 4------------------------
+
+                    //NEW 5----------------------------
+                    it(
+                        'should return false when the specified validation type is not found',
+
+                        function() {
+                            const validation = {
+                                type: 'foo',
+                                value: '42'
+                            };
+
+                            const isValid = validateItem(validation, validationRules);
+                            expect(isValid).to.be.false;
+                        }
+                    );
+
+
+                    //EO NEW 5------------------------------
+
+
+
+                });
+                //EO NEW 2--------------------------------
+
+
+
+
+            });
+
+            mocha.run();
+        }());
+    </script>
+</body>
+</html>

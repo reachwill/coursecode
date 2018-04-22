@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css">
+
+
+    <style>
+        .test-form {
+            display: none;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div id="mocha"></div>
+
+    <form class="test-form">
+        <input name="first-name" type="text" data-validation="alphabetical" />
+        <input name="age" type="text" data-validation="numeric" />
+    </form>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/3.2.0/mocha.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/3.5.0/chai.min.js"></script>
+    <script>
+        (function() {
+            'use strict';
+
+            // Implementation
+            function validateForm(form) {
+
+
+                const result = {
+                    errors: []
+                };
+
+                const inputs = Array.from(form.querySelectorAll('input'));
+                let isValid = true;
+
+                for (let input of inputs) {
+                    if (input.dataset.validation === 'alphabetical') {
+                        isValid = isValid && /^[a-z]+$/i.test(input.value);
+                        //NEW 2--------------------
+                        if (!isValid) {
+                            result.errors.push(new Error(`${input.value} is not a valid ${input.name} value`));
+                        }
+                        //EO NEW 2--------------------
+                    } else if (input.dataset.validation === 'numeric') {
+                        isValid = isValid && /^[0-9]+$/.test(input.value);
+                        //NEW 4--------------------
+                        if (!isValid) {
+                            result.errors.push(new Error(`${input.value} is not a valid ${input.name} value`));
+                        }
+
+                        //EO NEW 4------------------
+
+                    }
+                }
+
+                result.isValid = isValid;
+                return result;
+
+            }
+
+            // Test Setup
+            mocha.setup('bdd');
+            const {
+                expect
+            } = chai;
+
+            describe('the form validator', function() {
+                let form;
+
+                beforeEach(function() {
+                    //Between each test, we create a new clone of the form to remove the risk of potential side effects. The true parameter passed to cloneNode ensures that the form’s child nodes are also cloned:
+                    form = document.querySelector('.test-form').cloneNode(true);
+                });
+
+
+                describe('the validateForm function', function() {
+                    // Write your first test case here :)
+                    it('should validate a form with all of the possible validation types', function() {
+                        const name = form.querySelector('input[name="first-name"]');
+                        const age = form.querySelector('input[name="age"]');
+
+                        name.value = 'Bob';
+                        age.value = '42';
+
+                        const result = validateForm(form);
+                        expect(result.isValid).to.be.true;
+                        expect(result.errors.length).to.equal(0);
+                    });
+
+
+                    //NEW 1--------------------
+                    it('should return an error when a name is invalid', function() {
+                        const name = form.querySelector('input[name="first-name"]');
+                        const age = form.querySelector('input[name="age"]');
+
+                        name.value = '!!!';
+                        age.value = '42';
+
+                        const result = validateForm(form);
+
+                        expect(result.isValid).to.be.false;
+                        expect(result.errors[0]).to.be.instanceof(Error);
+                        expect(result.errors[0].message).to.equal('!!! is not a valid first-name value');
+                    });
+                    //EO NEW 1----------------------
+
+                    //NEW 3 -----------------------
+                    it('should return an error when an age is invalid', function() {
+                        const name = form.querySelector('input[name="first-name"]');
+                        const age = form.querySelector('input[name="age"]');
+
+                        name.value = 'Greg';
+                        age.value = 'a';
+
+                        const result = validateForm(form);
+
+                        expect(result.isValid).to.be.false;
+                        expect(result.errors[0]).to.be.instanceof(Error);
+                        expect(result.errors[0].message).to.equal('a is not a valid age value');
+                    });
+
+                    //EO NEW 3 -----------------------
+
+                    //NEW 5-----------------------------
+                    it('should return multiple errors if more than one field is invalid', function() {
+                        const name = form.querySelector('input[name="first-name"]');
+                        const age = form.querySelector('input[name="age"]');
+
+                        name.value = '!!!';
+                        age.value = 'a';
+
+                        const result = validateForm(form);
+
+                        expect(result.isValid).to.be.false;
+                        expect(result.errors[0]).to.be.instanceof(Error);
+                        expect(result.errors[0].message).to.equal('!!! is not a valid first-name value');
+                        expect(result.errors[1]).to.be.instanceof(Error);
+                        expect(result.errors[1].message).to.equal('a is not a valid age value');
+                    });
+                    //EO NEW 5-----------------------------------
+
+
+                });
+
+
+
+
+
+            });
+
+            mocha.run();
+        }());
+    </script>
+</body>
+</html>

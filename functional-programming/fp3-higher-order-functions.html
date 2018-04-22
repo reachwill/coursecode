@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*
+                       Functional programming tends to reuse a common set of functional utilities to process data. Object oriented programming tends to colocate methods and data in objects. Those colocated methods can only operate on the type of data they were designed to operate on, and often only the data contained in that specific object instance.
+
+                In functional programming, any type of data is fair game. The same map() utility can map over objects, strings, numbers, or any other data type because it takes a function as an argument which appropriately handles the given data type. FP pulls off its generic utility trickery using higher order functions.
+
+                JavaScript has first class functions, which allows us to treat functions as data — assign them to variables, pass them to other functions, return them from functions, etc…
+
+                A higher order function is any function which takes a function as an argument, returns a function, or both.
+
+                A functor is something that can be mapped over.
+                       
+                       */
+
+        const double = n => n * 2;
+        const doubleMap = numbers => numbers.map(double);
+        console.log(doubleMap([2, 3, 4])); // [ 4, 6, 8 ]
+
+        /*
+        
+        What if we want to operate on targets in a game to double the number of points they award? All we have to do is make a subtle change to the double() function that we pass into map(), and everything still works:
+        */
+
+        const double = n => n.points * 2;
+
+        const doubleMap = numbers => numbers.map(double);
+
+        console.log(doubleMap([{
+                name: 'ball',
+                points: 2
+            },
+            {
+                name: 'coin',
+                points: 3
+            },
+            {
+                name: 'candy',
+                points: 4
+            }
+        ])); // [ 4, 6, 8 ]
+
+    </script>
+
+</body>
+
+</html>

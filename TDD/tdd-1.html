@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css">
+
+
+    <style>
+        .test-form {
+            display: none;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div id="mocha"></div>
+
+    <form class="test-form">
+        <input name="first-name" type="text" data-validation="alphabetical" />
+        <input name="age" type="text" data-validation="numeric" />
+    </form>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/3.2.0/mocha.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/3.5.0/chai.min.js"></script>
+    <script>
+        (function() {
+            'use strict';
+
+            // Implementation
+            function validateForm(form) {
+
+            }
+
+            // Test Setup
+            mocha.setup('bdd');
+            const {
+                expect
+            } = chai;
+
+            describe('the form validator', function() {
+                let form;
+
+                beforeEach(function() {
+                    //Between each test, we create a new clone of the form to remove the risk of potential side effects. The true parameter passed to cloneNode ensures that the form’s child nodes are also cloned:
+                    form = document.querySelector('.test-form').cloneNode(true);
+                });
+
+                describe('the validateForm function', function() {
+                    // Write your first test case here :)
+                    
+                });
+            });
+
+            mocha.run();
+        }());
+    </script>
+</body>
+</html>

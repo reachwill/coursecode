@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        'use strict';
+//        const a = Object.freeze({
+//            foo: 'Hello',
+//            bar: 'world',
+//            baz: '!'
+//        });
+//
+//        a.foo = 'Goodbye';
+        // Error: Cannot assign to read only property 'foo' of object Object
+
+        const a = Object.freeze({
+            foo: {
+                greeting: 'Hello'
+            },
+            bar: 'world',
+            baz: '!'
+        });
+
+        a.foo.greeting = 'Goodbye';
+
+        console.log(`${ a.foo.greeting }, ${ a.bar }${a.baz}`);
+        
+        /*
+        
+        Tries use structural sharing to share reference memory locations for all the parts of the object which are unchanged after an object has been copied by an operator, which uses less memory, and enables significant performance improvements for some kinds of operations.
+
+For example, you can use identity comparisons at the root of an object tree for comparisons. If the identity is the same, you don’t have to walk the whole tree checking for differences.
+
+There are several libraries in JavaScript which take advantage of tries, including Immutable.js and Mori.
+        
+        */
+    </script>
+
+</body>
+</html>
