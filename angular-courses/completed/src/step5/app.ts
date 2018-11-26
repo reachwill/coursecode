@@ -13,27 +13,33 @@ import {ColorPreviewer} from "./color_previewer";
   template: `
 
 
-            <!--<color-picker #picker color="red"  (color)="onColor($event)">
-            </color-picker>--><!-- stage 1-->
+  <!--STAGE 1-------------------------------------->
 
+  <!--<color-picker (color)="onColor($event)">
+  </color-picker>-->
 
+  <!--<color-previewer  color="red"></color-previewer>-->
 
-            <!--<color-previewer  color="red"></color-previewer>-->
+  <!--STAGE 2---------------------------------------->
 
-            <!--<color-previewer  [color]="color"></color-previewer>-->
+  <!--<color-picker (color)="onColor($event)">
+  </color-picker>-->
 
-            <!--<color-picker #picker [color]="color"  (color)="color = $event">
-            </color-picker>--><!--stage 2-->
+  <!--<color-previewer  [color]="color"></color-previewer>-->
 
-            <!-- FINALLY MODIFY TO BECOME MORE DECALRATIVE-->
-            <color-picker #picker color="red"  (color)="previewer.color=$event">
-            </color-picker>--><!-- last stage-->
+  <!--STAGE 3---------------------------------------->
 
+  <!--<color-picker #picker [color]="color"  (color)="color = $event">
+  </color-picker>--><!--stage 2-->
 
+  <!-- FINALLY MODIFY TO BECOME MORE DECALRATIVE-->
 
-           <color-previewer #previewer ></color-previewer><!-- last stage-->
+  <color-picker #picker color="red"  (color)="previewer.color=$event.color">
+  </color-picker><!-- last stage-->
 
-            <button (click)="picker.reset()">Reset</button>
+  <color-previewer #previewer></color-previewer>
+
+  <button (click)="picker.reset()">Reset</button>
 
         `
 })
