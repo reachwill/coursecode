@@ -1,0 +1,17 @@
+<p>
+  home works
+</p>
+
+<<button type="button" (click)="toggle()">Toggle</button>
+<div [@openClose]="isOpen ? 'open' : 'closed'"  style="overflow:hidden">
+
+  <div *ngFor="let user of users" class="box">
+
+    <h2 >{{user.name}}</h2>
+    <p>{{user.role}}</p>
+
+  </div>
+
+
+    <p>The box is now {{ isOpen ? 'Open' : 'Closed' }}!</p>
+</div>

@@ -19,17 +19,17 @@ import {ImpressionsByCountryWidget} from "./impresssions-by-country.component";
   <header class="l-header v-center-parent">
     <img class="v-center" routerLink="home"
         src="https://angular-academy.s3.amazonaws.com/main-logo/main-page-logo-small-hat.png">
-            
+
   </header>
 
   <main class="l-main l-sample-app">
-    
+
     <div>
-    
+
         <div class="main-container">
-        
+
             <router-outlet></router-outlet>
-            
+
             <router-outlet name="section1"></router-outlet>
 
             <router-outlet name="section2"></router-outlet>
@@ -37,7 +37,7 @@ import {ImpressionsByCountryWidget} from "./impresssions-by-country.component";
             <router-outlet name="section3"></router-outlet>
 
         </div>
-    
+
     </div>
 
   </main>
@@ -61,21 +61,3 @@ export class AppModule {
 }
 
 platformBrowserDynamic().bootstrapModule(AppModule);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
