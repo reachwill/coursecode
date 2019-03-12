@@ -1,0 +1,17 @@
+
+form{
+  padding:50px;
+}
+
+label{
+  width:55%;
+  display: block !important;
+}
+
+.alert{
+  color:red;
+}
+
+.alert:after{
+  content: '*';
+}

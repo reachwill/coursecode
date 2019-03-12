@@ -1,0 +1,25 @@
+<form [formGroup]="rForm">
+
+  <div class="form-container">
+
+      <div class="row columns">
+
+          <label>Name
+            <input type="text" formControlName="name">
+          </label>
+          <div class="alert" *ngIf="!rForm.controls['name'].valid && rForm.controls['name'].touched">{{errorMessage}}</div>
+
+          <label>Description
+            <textarea formControlName="description"></textarea>
+          </label>
+          <div class="alert" *ngIf="!rForm.controls['description'].valid && rForm.controls['description'].touched">{{errorMessage}}</div>
+
+          <label for="validate">Minimum of 3 Characters</label>
+          <input type="checkbox" name="validate" value="1" formControlName="validate">
+
+          <button type="submit" class="button expanded"></button>
+
+
+        </div>
+    </div>
+</form>
