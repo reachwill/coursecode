@@ -1,0 +1,10 @@
+<h2>{{heading}}</h2>
+
+<!-- <p>{{results}}</p> -->
+
+<ul>
+    <li *ngFor="let lesson of results">
+        {{lesson.description}}
+        <button (click)="lessonsService.delete(lesson.id)">Delete</button>
+    </li>
+</ul>
