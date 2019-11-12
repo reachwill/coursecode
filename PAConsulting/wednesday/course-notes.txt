@@ -1,0 +1,53 @@
+Node Intro
+
+***Introduction*****
+Slides - NodeIntro
+
+***Node REPL - Read Eval Print Loop***
+node
+> var x = 0
+undefined
+> do {
+   ... x++;
+   ... console.log("x: " + x);
+   ... } 
+while ( x < 5 );
+------------------------
+ var x = 10
+undefined
+> var y = 20
+undefined
+> x + y
+30
+> var sum = _
+undefined
+> console.log(sum)
+30
+————————————
+
+***NPM***
+$ npm --version
+
+to update: $ sudo npm install npm --save  -g
+
+global vs local npm install
+$ npm ls -g
+
+$ npm uninstall express
+$ npm update express
+$ npm search express
+
+***Event Loop***
+Slides - NodeIntro then eg-eventloop.js
+
+***EventEmitter Loop***
+Slides - NodeIntro then eg-eventemitter.js
+
+***Buffer***
+Slides - NodeIntro then eg-buffer.js
+
+***Stream***
+Slides - NodeIntro then eg-stream.js
+
+***Process***
+Slides - NodeIntro then eg-process.js
