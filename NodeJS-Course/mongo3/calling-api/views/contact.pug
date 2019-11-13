@@ -1,0 +1,16 @@
+extends layout
+
+
+block content
+  div.container
+    h1= message
+    form(action="/send",method="post")
+      ul
+        li
+          input(type="text",name="user[name]",required)
+        li
+          input(type="text",name="user[email]")
+        li
+          textarea(name="user[message]")
+        li
+          button(type="submit") Send

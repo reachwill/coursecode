@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  div(class="container")
+    h1= message
+    ul
+      each message in results
+        li.message(data-id=message._id)
+          h3= message.name
+            span(style="float:right;font-size:.75em;")
+              a(href="#", class="delete", data-id=message._id) delete
+
+
+          a(href="#",data-type="textarea", data-pk=message._id,class="editable editable-pre-wrapped editable-click editable-open")
+            div(class="content")= message.message
+          hr
+  script(src="/js/messages.js")
