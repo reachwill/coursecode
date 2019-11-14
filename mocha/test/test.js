@@ -40,3 +40,28 @@ describe('Cash Register', function () {
 // set up coverage and script in package.json
 //npm install --save-dev nyc
 //add coverage script to package.json
+
+
+//now for Promises - make promise.js
+var moduleToTest = require('../promise.js');  // our module
+describe('PromiseTest', function () {
+    describe('Return from Promise', function () {
+        it('should have method getUsers', function () {
+            assert.equal(typeof moduleToTest.getUsers, 'function');
+        })
+        it('should return 1 with a then', async () => {
+            const users = 'YEHAH';
+            const data = await moduleToTest.getUsers().then((data)=>{assert.equal(data, users);});
+        })
+        it('should return 1 with an await', async () => {
+            const users = 'YEHAH';
+            const data = await moduleToTest.getUsers();
+            assert.equal(data, users);
+        })
+        it('should return an array [1,2,3,4]', async () => {
+            const array = [1,2,3,4];
+            const data = await moduleToTest.getArray();
+            assert.deepEqual(data, array);
+        })
+    })
+});
