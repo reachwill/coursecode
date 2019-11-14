@@ -1,0 +1,37 @@
+var express = require('express');
+var app = express();
+var bodyParser = require('body-parser');
+var ObjectId = require('mongodb').ObjectID;
+
+const url = 'mongodb+srv://will:wellinever@cluster0-zsfvp.mongodb.net/test?retryWrites=true&w=majority';
+const m = require('mongodb');
+const MongoClient = new m.MongoClient(url,{ useUnifiedTopology: true } );
+
+//var url = 'mongodb://localhost:27017/nodecourse';
+//var url = 'mongodb://wg-node:well1never@ds121565.mlab.com:21565/wg-node';
+
+// Use connect method to connect to the Server
+// MongoClient.connect((err, dbclient) => {
+//     if (err) return console.log(err)
+//     console.log("Connected correctly to server");
+//     dbclient.close();
+// });
+MongoClient.connect((err, dbclient) => {
+    if (err) return console.log(err)
+    console.log("Connected correctly to server");
+    
+        let db = dbclient.db('db1');
+        db.collection('flags').insertOne({message:'hello'}, (err, result) => {
+            if (err) return console.log(err)
+
+            console.log('saved to database')
+            db.collection('flags').find({}, (err, result) => {
+                if (err) return console.log(err)
+                result.toArray().then((r)=>{console.log(r)})
+                
+                dbclient.close();
+            })
+            //res.send(JSON.stringify(req.body));
+        })
+        
+});
