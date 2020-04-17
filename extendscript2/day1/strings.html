@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <ul id="cities"></ul>
+    <ul id="countries"></ul>
+
+    <script src="js/utilities.js"></script>
+
+    <script>
+
+        var dataSourceString = 'London,Stirling,Glasgow,Liverpool,New York,Adelaide,Bristol';
+
+        //substr
+        var firstCity = dataSourceString.substr(0,6);
+        console.log(firstCity);
+        var lastCity = dataSourceString.substr(dataSourceString.lastIndexOf(',')+1);
+        console.log(lastCity);
+
+        //split the string into an array
+        // var cities = dataSourceString.split(',');
+        // console.log(cities[1]);
+
+        var cities = utilities.generateArray(dataSourceString, true, ',');
+        console.log(cities);
+        var listItemsString = '';
+        for(var i = 0 ; i < cities.length ; i++){
+            listItemsString += '<li>' + cities[i] + '</li>'; 
+        }
+        console.log(listItemsString);
+        document.getElementById('cities').innerHTML = listItemsString;
+        
+
+
+        var countriesString = 'France|Argentina|Scotland|Nigeria';
+        var countries = utilities.generateArray(countriesString, true, '|');
+        console.log(countries);
+        listItemsString = '';
+        for(var i = 0 ; i < countries.length ; i++){
+            listItemsString += '<li>' + countries[i] + '</li>'; 
+        }
+        console.log(listItemsString);
+        document.getElementById('countries').innerHTML = listItemsString;
+
+
+        var aString = 'The UK terms and conditions applying to jobs at UK offices';
+
+        var modifiedString = aString.replace(/UK/g, 'England');
+        console.log(modifiedString);
+        
+        var nINumber = 'NC453278A';
+
+        var regex = /^[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{0,1}$/;
+        var valid = regex.test(nINumber);
+        console.log(valid);
+        
+
+        
+
+
+        
+        
+        
+
+
+
+    </script>
+
+
+
+</body>
+</html>

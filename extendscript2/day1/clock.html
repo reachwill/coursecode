@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #clock{
+            font-family: 'Courier New', Courier, monospace;
+            background-color: black;
+            color: greenyellow;
+            font-size: 4em;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="clock"></div>
+
+    <script src="js/utilities.js"></script>
+
+    <script>
+
+        //create an object to contain the code for our clock - namespacing
+        var clock = {
+            updateTime: function () {
+                var now = new Date();
+                var hours = utilities.formatNum(now.getHours());
+                var minutes = utilities.formatNum(now.getMinutes());
+                var seconds = utilities.formatNum(now.getSeconds());
+
+                var timeToDisplay = hours + ':' + minutes + ':' + seconds;
+                document.getElementById('clock').innerHTML = timeToDisplay;
+            }
+            
+        };//EO clock object
+
+        //utilities.formatNum(12);
+        var testNum = utilities.formatNum(8);
+        console.log(testNum);
+        
+
+
+        clock.updateTime();
+        setInterval(clock.updateTime, 1000);
+
+
+
+
+    </script>
+
+
+
+</body>
+
+</html>

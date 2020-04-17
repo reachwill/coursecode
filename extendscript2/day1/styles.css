@@ -1,0 +1,19 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+figcaption{
+    background: black;
+    text-align: center;
+    color: white;
+    padding: 10px 0;
+}
+
+figure{
+    width: 400px;
+}
+
+img{
+    width: 100%;
+}

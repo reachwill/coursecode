@@ -1,0 +1,51 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        
+        {
+            "type": "extendscript-debug",
+            "request": "launch",
+            "name": "Test script",
+            "program": "${workspaceFolder}/test.jsx",
+            "stopOnEntry": false
+        },
+        {
+            "type": "extendscript-debug",
+            "request": "launch",
+            "name": "Save all script",
+            "program": "${workspaceFolder}/save-all.jsx",
+            "stopOnEntry": false
+        },
+        {
+            "type": "extendscript-debug",
+            "request": "launch",
+            "name": "Save all and close script",
+            "program": "${workspaceFolder}/save-all-and-close.jsx",
+            "stopOnEntry": false
+        },
+        {
+            "type": "extendscript-debug",
+            "request": "launch",
+            "name": "Unembed all embedded images script",
+            "program": "${workspaceFolder}/unembed.jsx",
+            "stopOnEntry": false
+        },
+        {
+            "type": "extendscript-debug",
+            "request": "launch",
+            "name": "Layers to PNG script",
+            "program": "${workspaceFolder}/layers-to-png.jsx",
+            "stopOnEntry": false
+        },
+        {
+            "type": "extendscript-debug",
+            "request": "launch",
+            "name": "User Interface - Layers to PNG/PDF script",
+            "program": "${workspaceFolder}/ui.jsx",
+            "stopOnEntry": false
+        }
+    ]
+}

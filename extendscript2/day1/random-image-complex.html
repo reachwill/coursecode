@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+
+
+        figure{
+            animation: scale 2s 1;
+            animation-timing-function: ease-in-out;
+        }
+
+
+
+        @keyframes rotate{
+
+            0%{
+                transform: rotateY(0deg);
+            }
+
+            100%{
+                transform: rotateY(360deg);
+            }
+
+        }
+
+
+        @keyframes scale{
+
+            0%{
+                transform: scale(1,1);
+            }
+
+            50%{
+                transform: scale(3,3);
+            }
+
+            100%{
+                transform: scale(1,1);
+            }
+
+        }
+
+
+
+    </style>
+
+
+
+
+</head>
+<body>
+    
+
+    <div id="gallery">
+
+        <figure>
+            <img id="bannerImg">
+            <figcaption id="bannerCaption"></figcaption>
+        </figure>
+
+    </div>
+
+
+    <script>
+
+        //create an array of OBJECTS
+        var images = [
+            {
+                fileName: 'porsche1.jpg',
+                description: 'A fast car',
+                cost: '25000'
+            },
+            {
+                fileName: 'porsche2.jpg',
+                description: 'A very fast car',
+                cost: '45000'
+            },
+            {
+                fileName: 'porsche3.jpg',
+                description: 'A really fast car',
+                cost: '65000'
+            },
+            {
+                fileName: 'porsche4.jpg',
+                description: 'A lovely car',
+                cost: '95000'
+            },
+            {
+                fileName: 'porsche5.jpg',
+                description: 'The fastest car',
+                cost: '125000'
+            }
+        ];
+
+        //generate a random number to pick a single car
+        var randomNum = Math.floor(Math.random() * 5);
+
+        console.log(randomNum);
+
+        document.getElementById('bannerImg').src = 'car-images/' + images[randomNum].fileName;
+        document.getElementById('bannerCaption').innerHTML = images[randomNum].description;
+        
+
+
+    </script>
+
+</body>
+</html>

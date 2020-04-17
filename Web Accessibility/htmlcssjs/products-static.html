@@ -1,0 +1,170 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Indicia Training - Products Page</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>Products</h1>
+        <nav>
+            <ul>
+                <li><a href="index-start.html" class="icon-home"></a></li>
+                <li><a href="products-static.html">products</a></li>
+                <li><a href="contact-start.html">contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    
+
+    <aside id="promotion"></aside>
+
+    <section class="clear-flt" aria-label="Products section of page">
+
+        <h1>Products</h1>
+        
+        <div>
+            <button type="button" id="getDataBtn" aria-label="Click to download latest products">Get Data</button>
+        </div>
+
+        
+        <table border="1" id="products" aria-live="assertive">
+           
+        </table>
+    </section>
+
+    <footer>
+
+        &copy; 2019 | <a href="terms.pdf">Terms &amp; Conditions</a> |
+        <a href="tel:0141557676">Call us on 0141 555 7676 &phone;</a>
+
+
+    </footer>
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    
+    <script src="js/common.js"></script>
+    
+    <script src="js/notify.js"></script>
+    
+    <script>
+    
+        $(document).ready(function(){
+            
+            //hide the tables by default
+            $('#products,#savedItems').hide();
+            
+            //the vanilla js way of the above would be...
+            //document.getElementById('products').style.display = 'none';
+            //document.getElementById('savedItems').style.display = 'none';
+            
+            //check for savedItems in localStorage
+            if(localStorage.getItem('savedItems') != undefined){
+                $('#savedItems tbody').html(localStorage.getItem('savedItems'));
+                $('#savedItems').fadeIn();
+            }
+            
+            
+            //listen for the user clicking the getDataBtn
+            $('#getDataBtn').click(function(){
+                
+                //use the jquery ajax function to get data
+                $.ajax({
+                    url:'cars.json',
+                    type:'get',
+                    //data:{category:$('#category').val()},
+                    dataType:'json',
+                    success:function(data){
+                        console.table(data.cars);
+                        $('#products').html('');
+                        //clear exisitng items from the table
+                        let html = '<thead><tr><th>Make</th><th>Model</th><th>Description</th><th>Cost</th></tr></thead><tbody>';
+                        
+                        //loop thru each car and create a table row
+                        var numCars = data.cars.length;
+                        for(var i=0 ; i<numCars ; i++){
+                            
+                            var rowHTML = '<tr data-productid="' + data.cars[i].id + '">';
+                            rowHTML += '<td>' + data.cars[i].make + '</td>';
+                            rowHTML += '<td>' + data.cars[i].model + '</td>';
+                            rowHTML += '<td>' + data.cars[i].description + '</td>';
+                            rowHTML += '<td>' + data.cars[i].cost + '</td>';
+                            
+
+                            rowHTML += '</tr>';
+                            html+=rowHTML;
+                            //$('#products tbody').append(rowHTML);
+                        }//EO for loop
+                        html+="</tbody></table>"
+                        $('#products').html(html);
+                        $('#products').fadeIn();
+                        
+                    },
+                    error:function(xmlHttpRequest,status,message){}
+                });//EO ajax()
+                
+            });//EO $('#getDataBtn').click
+            
+            //listen for the user clicking on .saveLinks. We are using the on()
+            //method because the .saveLinks are only created dynamically when the user clicks the getDataBtn. This guarantees that a click handler is registered whwenever .saveLinks are created after the document.ready()
+            $('#products tbody').on('click','.saveLink',function(event){
+                //console.log(event);
+                //prevent the browser from performing its default behaviour
+                event.preventDefault();
+                
+                //check if item is already in savedItems table
+                var itemToAddId = $(this).closest('tr').data('productid');
+                //console.log(itemToAddId);
+                var found = false;
+                //loop thru savedItems table looking for itemToAddId (using jQuery each() loop)
+                $('#savedItems tbody tr').each(function(index,element){
+                    if($(this).data('productid') == itemToAddId){
+                        found = true;
+                    }
+                });//EO each()
+                
+                if(found != true){
+                    //add the .savedLink's <tr> to the savedItems table
+                    var rowToSave = $(this).closest('tr').clone();
+                    //remove the action column from cloned row
+                    rowToSave.find('td:last-child').remove();
+                    //add to savedItems table
+                    $('#savedItems tbody').append(rowToSave);
+                    $('#savedItems').fadeIn();
+                    
+                    $('#savedItems').notify('Item saved for later',{
+                        position:'top right',
+                        className:'success'
+                    });
+                    
+                    //save to localStorage for persistence
+                    localStorage.setItem('savedItems',$('#savedItems tbody').html());
+                    
+                }else{
+                    
+                    $('#products').notify('Item already saved',{
+                        position:'top right',
+                        className:'error'
+                    });
+                    
+                }
+                
+            });//EO $('#products tbody').on()
+            
+            
+        });
+    
+    </script>
+
+
+</body>
+
+
+
+</html>

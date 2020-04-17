@@ -1,0 +1,22 @@
+{
+  "name": "types-for-adobe",
+  "version": "1.6.1",
+  "files": [
+    "AfterEffects",
+    "Animate",
+    "Audition",
+    "InDesign",
+    "Illustrator",
+    "Photoshop",
+    "Premiere",
+    "shared"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pravdomil/types-for-adobe.git"
+  },
+  "scripts": {
+    "test": "_bin/test"
+  },
+  "license": "MIT"
+}

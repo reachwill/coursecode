@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    
+    <input type="text" id="username_txt">
+    <button onclick="buttonClicked()">Click Me</button>
+
+    <div id="message"></div>
+
+    <script>
+
+        //declare a global variable to store the username
+        var userName = 'Will';
+       
+        //create a function to handle the Click Me button
+        function buttonClicked(){
+
+            //decalre a variable which is local to the function
+            var userName = window.document.getElementById('username_txt').value;
+            console.log(userName);
+            var message = 'Hello ' + userName;
+            document.getElementById('message').innerHTML = message;
+
+        }
+
+
+    </script>
+
+</body>
+</html>

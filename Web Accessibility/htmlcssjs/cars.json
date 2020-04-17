@@ -1,0 +1,32 @@
+{
+    "cars":[
+        {
+            "make":"Maserati",
+            "model":"Gran Turismo",
+            "description":"A nice car",
+            "cost":"85000",
+            "id":"0001"
+        },
+        {
+            "make":"Maserati",
+            "model":"Gran Turismo",
+            "description":"A very nice car",
+            "cost":"95000",
+            "id":"0002"
+        },
+        {
+            "make":"Maserati",
+            "model":"Le Mans",
+            "description":"A really nice car",
+            "cost":"105000",
+            "id":"0003"
+        },
+        {
+            "make":"Maserati",
+            "model":"Quattroporte",
+            "description":"A big car",
+            "cost":"125000",
+            "id":"0004"
+        }
+    ]
+}
