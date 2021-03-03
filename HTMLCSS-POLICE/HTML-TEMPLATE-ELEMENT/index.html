@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial;
+        }
+    </style>
+</head>
+
+<body>
+
+    <template id="dialog-template">
+
+        <script>
+            document.getElementById('showDialogBtn').addEventListener('click', ()=>{
+                const wrapper = document.querySelector('.wrapper');
+                const closeButton = document.querySelector('button.close');
+                const wasFocussed = document.activeElement;
+                wrapper.classList.add('open');
+                closeButton.addEventListener('click', ()=>{
+                    wrapper.classList.remove('open');
+                    wasFocussed.focus();
+                })
+            })
+        </script>
+
+
+        <style>
+            .wrapper {
+                opacity: 0;
+                transition: visibility 0s, opacity 0.25s ease-in;
+            }
+
+            .wrapper:not(.open) {
+                visibility: hidden;
+            }
+
+            .wrapper.open {
+                align-items: center;
+                display: flex;
+                justify-content: center;
+                height: 100vh;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .overlay {
+                background: rgba(0, 0, 0, 0.8);
+                height: 100%;
+                position: fixed;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+            }
+
+            .dialog {
+                background: #fade3e;
+                max-width: 600px;
+                min-height: 300px;
+                position: fixed;
+            }
+
+            #title {
+                background: #38320d;
+                color: white;
+                margin: 0;
+                padding: 10px;
+            }
+
+            #content {
+                padding: 10px;
+            }
+
+            button {
+                /* all: unset; */
+                cursor: pointer;
+                font-size: 1.25rem;
+                position: absolute;
+                top: 1rem;
+                right: 1rem;
+            }
+
+            button:focus {
+                border: 2px solid blue;
+            }
+        </style>
+
+        <button id="showDialogBtn">Open Dialog Box</button>
+        <div class="wrapper">
+            <div class="overlay"></div>
+            <div class="dialog" role="dialog" aria-labelledby="dialog-title" aria-describedby="dialog-content">
+                <button class="close" aria-label="Close">X</button>
+                <h2 id="dialog-title">Dialog</h2>
+                <div id="dialog-content">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam totam explicabo dicta deleniti
+                        sequi et voluptatibus necessitatibus repudiandae, minus debitis. Molestiae aperiam porro hic
+                        voluptatem perspiciatis accusamus sapiente non repudiandae!</p>
+                </div>
+            </div>
+        </div>
+
+    </template>
+
+    <script>
+        function displayDialogTemplate(templateId) {
+            const template = document.getElementById(templateId);
+            document.body.appendChild(document.importNode(template.content, true));
+        }
+
+        displayDialogTemplate('dialog-template');
+    </script>
+
+</body>
+
+</html>

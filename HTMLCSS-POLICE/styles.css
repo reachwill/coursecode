@@ -1,0 +1,282 @@
+@import url(assets/reset.css);
+@import url(https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css);
+@import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css);
+@import url(https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap);
+
+
+
+body{
+    font-family: Raleway, sans-serif;
+    padding: 10px;
+    margin: 10px;
+}
+
+p{
+    margin: 10px 0;
+}
+
+h1{
+    font-size: 1.5em;
+    margin: 10px 0;
+}
+
+/* table styling */
+
+table{
+    border: 1px solid #ccc;
+}
+
+th, td{
+    padding: 7px;
+    text-align: left;
+    vertical-align: top;
+}
+
+th{
+    background: green;
+    color: white;
+}
+
+tbody tr:nth-child(even){
+    background: #efefef;
+}
+
+caption{
+    position: absolute;
+    left: -2000px;
+}
+
+#products td:nth-child(3){
+    font-weight: bold;
+}
+
+#products td:nth-child(3):before{
+    content: '£';
+}
+
+/* form styling */
+fieldset{
+    border: 1px solid #ccc;
+    margin: 15px 0;
+    padding: 10px;
+}
+
+legend{
+    color: rgb(63, 12, 12);
+    letter-spacing: .15em;
+}
+
+label{
+    display: block;
+    margin-bottom: 7px;
+}
+
+form li{
+    margin: 15px 0;
+}
+
+input{
+    width: 100%;
+    max-width: 300px;
+    padding: 7px;
+    border: 1px solid #333;
+}
+
+input:required{
+    background: url(form_demo/images/red_asterisk.png) no-repeat 98%;
+}
+
+input:required:valid{
+    background: url(form_demo/images/valid.png) no-repeat 98%;
+}
+
+input:focus:invalid{
+    background: url(form_demo/images/invalid.png) no-repeat 98%;
+}
+
+
+.horizontal label{
+    display: inline;
+}
+.horizontal input[type=radio]{
+    width: auto
+}
+
+
+
+
+body > header, body > aside, body > section, body > footer{
+    border: 1px solid red;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 0 auto 10px auto;
+    max-width: 1000px;
+}
+
+body > footer{
+    margin-bottom: 0;
+}
+
+body > header  h1{
+    font-size: 4em;
+    color: #ffffff;
+    text-shadow: 1px 1px 2px #000000;
+}
+
+body > header nav{
+    padding: 7px;
+    background: rgba(0, 0, 0, 0.3);
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+body > header nav li{
+    display: inline;
+}
+
+body > header nav a{
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#aebcbf+0,6e7774+50,0a0e0a+51,0a0809+100;Black+Gloss */
+background: #aebcbf; /* Old browsers */
+background: -moz-linear-gradient(top,  #aebcbf 0%, #6e7774 50%, #0a0e0a 51%, #0a0809 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top,  #aebcbf 0%,#6e7774 50%,#0a0e0a 51%,#0a0809 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,  #aebcbf 0%,#6e7774 50%,#0a0e0a 51%,#0a0809 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#aebcbf', endColorstr='#0a0809',GradientType=0 ); /* IE6-9 */
+
+    padding: 3px;
+    text-decoration: none;
+    border-radius: 3px;
+    width: 70px;
+    display: inline-block;
+    text-align: center;
+    color: white;
+}
+
+body > header nav a:hover{
+    background: green;
+    transition: background 0.25s;
+}
+
+body > header{
+    height: 300px;
+    background: url(assets/surfing2.jpg) no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+body > aside{
+    min-height: 125px;
+}
+
+/* element selectors have a specificity of 1 */
+/* class selectors have a specificity of 10 */
+/* id selectors have a specificity of 100 */
+
+.logo-flt-right{
+    border: 1px solid black;
+    float: right;
+    margin: 0 0 0 10px;
+}
+
+.logo-flt-left{
+    border: 1px solid black;
+    float: left;
+    margin: 0 10px 0 0;
+}
+
+section{
+    clear: both;
+}
+
+section article h1{
+    font-size: 1.25em;
+}
+
+section article .content{
+    column-count: 2;
+}
+
+.clickable{
+    cursor: pointer;
+    color: blue;
+}
+
+.clickable h1:after{
+    content: ' +';
+}
+
+.clickable:hover{
+    color: orange;
+}
+
+section article .content p:first-child{
+    margin-top: 0;
+}
+
+section article .content p{
+    /* text-align: justify; */
+}
+
+footer{
+    text-align: center;
+}
+
+
+a[href$=pdf], a[href$=PDF]{
+    background: url(images/pdf.jpg) no-repeat right;
+    background-size: 16px;
+    padding-right: 20px;
+}
+
+address{
+    display: inline-block;
+    font-style: normal;
+}
+
+.seperator{
+    color: red;
+    font-weight: bold;
+}
+
+
+
+
+
+
+.rotate{
+    animation: rotate 2s;
+}
+
+/* CSS Animations */
+@keyframes rotate{
+    0%{
+        transform: rotateY(0deg);
+    }
+
+    100%{
+        transform: rotateY(360deg);
+    }
+}
+
+
+
+/* Media Queries */
+@media print{
+    video, img{
+        display: none;
+    }
+    body{
+        font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+}
+
+@media only screen and (max-width: 700px){
+    section article .content{
+        column-count: 1;
+    }
+}
+@media only screen and (max-device-width: 700px){
+    section article .content{
+        column-count: 1;
+    }
+}

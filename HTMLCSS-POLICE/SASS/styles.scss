@@ -1,0 +1,24 @@
+@import 'base';
+
+//mixins
+@mixin alert-message($color, $fontSize){
+    color: $color;
+    font-weight: bold;
+    font-size: $fontSize;
+}
+
+.important-text{
+    @include alert-message(#de5566, 3em);
+}
+
+section{
+    width: 600px / 1000px * 100%;
+    background: $primary;
+    article{
+        padding: 10px;
+        header{
+            background: $secondary;
+        }
+    }
+}
+

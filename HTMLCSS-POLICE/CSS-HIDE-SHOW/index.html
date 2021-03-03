@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../BS/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <style>
+        .helper-trigger, .helper-show{
+            display: none;
+        }
+
+        .helper-trigger[type="checkbox"]:checked+.helper-show{
+            display: block;
+        }
+
+        .helper-trigger[type="checkbox"]:checked+.helper-show+.helper-hide{
+            display: none;
+        }
+
+
+    </style>
+
+
+</head>
+<body>
+
+    <div class="container">
+        <h1>Hide Show With CSS</h1>
+        <p>Give us a review...</p>
+
+        <input type="checkbox" class="helper-trigger" id="addReview" name="addReview">
+
+        <div class="helper-show">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input class="form-control" type="text" name="name" placeholder="Your Name">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input class="form-control" type="email" name="email" placeholder="Your Email">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <textarea name="message" id="message" rows="6" class="form-control"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="addReview" class="btn btn-link">
+                    <span class="text-muted">Cancel</span>
+                </label>
+                <label for="addReview" class="btn btn-success">
+                    Send Review
+                </label>
+            </div>
+        </div>
+
+        <label for="addReview" class="btn btn-success helper-hide">Add Review</label>
+
+
+
+
+
+
+    </div>
+    
+</body>
+</html>

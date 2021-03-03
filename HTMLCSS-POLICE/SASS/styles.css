@@ -1,0 +1,23 @@
+body {
+  font: 100% Arial, Helvetica, sans-serif;
+}
+
+.important-text {
+  color: #de5566;
+  font-weight: bold;
+  font-size: 3em;
+}
+
+section {
+  width: 60%;
+  background: #f00;
+}
+
+section article {
+  padding: 10px;
+}
+
+section article header {
+  background: #00f;
+}
+/*# sourceMappingURL=styles.css.map */

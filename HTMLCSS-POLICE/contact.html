@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en-gb">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML5 CSS3 Products</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+    <header>
+
+        <h1>HTML CSS Essentials</h1>
+
+
+        <nav class="animate__animated animate__bounce">
+            <ul>
+                <li><a href="index.html" aria-label="Link to home page"><i class="fas fa-home"></i></a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <aside>
+        <article>
+            <figure class="logo-flt-right rotate">
+                <img src="assets/sm-logo.gif" alt="SM Logo">
+                <figcaption>SM Logo</figcaption>
+            </figure>
+            <h1>Featured Promotion</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum ullam laboriosam aliquam velit
+                asperiores, tempore provident ipsa magnam soluta eius reprehenderit non? Harum aut laboriosam natus
+                eveniet nobis iure veniam.</p>
+            <p>Fugiat quibusdam facilis esse eum sit impedit qui ipsam quia, error repellendus itaque, dolores
+                accusantium, ullam provident doloribus id quo quaerat. Expedita odit possimus atque iste cum soluta.
+                Consequatur, facilis.</p>
+        </article>
+    </aside>
+
+    <section>
+        <h1>Contact</h1>
+        <form action="#" method="post"  autocomplete="off">
+            <fieldset>
+                <legend>Your Details</legend>
+                <ul>
+                    <li>
+                        <label for="name">Your Name</label>
+                        <input type="text" name="name" id="name" placeholder="John Doe" required>
+                    </li>
+                    <li>
+                        <label for="email">Your Email</label>
+                        <input type="email" name="email" id="email" placeholder="johndoe@example.com" required>
+                    </li>
+                    <li>
+                        <label for="url">Your Website</label>
+                        <input type="text" name="url" id="url" pattern="(http|https)://.+" placeholder="http://..." required>
+                    </li>
+                </ul>
+            </fieldset>
+
+            <fieldset>
+                <legend>Work Details</legend>
+                <ul>
+                    <li>
+                        <label for="office">Office</label>
+                        <input list="offices" name="office" id="office">
+                        <datalist id="offices">
+                            <option value="Dundee">
+                            <option value="Glasgow">
+                            <option value="Edinburgh">
+                            <option value="Dumfries">
+                        </datalist>
+
+                    </li>
+                    <li>
+                        <label for="office">Office</label>
+                        <select name="office" id="office">
+                            <option value="Dundee">Dundee</option>
+                            <option value="Glasgow">Glasgow</option>
+                            <option value="Edinburgh">Edinburgh</option>
+                            <option value="Dumfries">Dumfries</option>
+                        </select>
+                    </li>
+                    <li>
+                        <label for="startDate">Start Date</label>
+                        <input type="" name="startDate" id="startDate" min="2021-01-30">
+                    </li>
+                    <li class="horizontal" >
+                        Gender: 
+                        <label>
+                            Male <input type="radio" name="gender" id="gender" value="male">
+                        </label>
+                        <label>
+                            Female<input type="radio" name="gender" id="gender" value="female">
+                        </label>
+                    </li>
+                </ul>
+            </fieldset>
+
+            <button type="submit">Send</button>
+        </form>
+    </section>
+
+
+
+
+
+    <footer>
+
+        &copy; Indicia Training 2021 <span class="seperator"> | </span> 
+
+        <address>
+            12 West George St, Glasgow G1 6RG <span class="seperator"> | </span>
+        </address>
+
+        <a href="tel:01417775555">Call us on 0141 777 5555</a> <span class="seperator"> | </span>
+
+        <a href="terms.pdf">Terms & Conditions</a> 
+
+
+    </footer>
+
+</body>
+
+</html>
